@@ -9,33 +9,34 @@ function Navbar() {
         <div className="flex flex-col items-center">
           <img src={logo} alt="CourseHub Logo" className="w-10 h-10" />
 
-          <span className="text-lg sm:text-xl font-bold">CourseHub</span>
+          <span className="text-sm md:text-lg font-bold">CourseHub</span>
         </div>
 
         <div className="flex items-center gap-3 sm:gap-5 md:gap-8">
           <Link
             to="/"
-            className="text-gray-700 hover:text-blue-500 font-medium transition"
+            className="text-sm md:text-base text-gray-700 hover:text-blue-500 font-medium transition"
           >
             Home
           </Link>
 
           <Link
             to="/courses"
-            className="text-gray-700 hover:text-blue-500 font-medium transition"
+            className="text-sm md:text-base text-gray-700 hover:text-blue-500 font-medium transition"
           >
             Courses
           </Link>
+
           <Link
-            to="/MyCourses"
-            className="text-gray-700 hover:text-blue-500 font-medium transition"
+            to="/my-courses"
+            className="text-sm md:text-base text-gray-700 hover:text-blue-500 font-medium transition"
           >
             My Courses
           </Link>
 
           <Link
             to="/login"
-            className="bg-blue-600 text-white rounded-xl hover:bg-blue-800 px-3 py-2 font-medium transition"
+            className="text-sm md:text-base bg-blue-600 text-white rounded-xl hover:bg-blue-800 px-3 py-2 font-medium transition"
           >
             Login
           </Link>

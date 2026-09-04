@@ -7,6 +7,10 @@ import Home from "./components/Home.jsx";
 import Courses from "./components/Courses.jsx";
 import ComponentDescription from "./components/ComponentDescription.jsx";
 import PageTransition from "./components/PageTransition.jsx";
+import ViewCourse from "./components/ViewCourse.jsx";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import MyCourses from "./components/MyCourses";
 
 function App() {
   return (
@@ -16,8 +20,11 @@ function App() {
         <PageTransition>
           <Routes>
             <Route path="/" element={<ComponentDescription />} />
-
             <Route path="/courses" element={<Courses />} />
+            <Route path="/ViewCourse" element={<ViewCourse />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/my-courses" element={<MyCourses />} />
           </Routes>
         </PageTransition>
       </main>
@@ -26,5 +33,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

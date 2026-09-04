@@ -3,42 +3,32 @@ import CourseCard from "./CourseCard";
 
 function Courses() {
   const paidCourses = [
-    {
-      title: "React JS",
-      price: "₹999",
-      duration: "8 Weeks",
-      rating: "4.8",
-    },
+    { title: "React JS", price: "₹999", duration: "8 Weeks", rating: "4.8" },
     {
       title: "Full Stack Development",
       price: "₹1499",
-      duration: "12 Weeks",
+      duration: "8 Weeks",
       rating: "4.9",
     },
     {
       title: "Python for Data Science",
       price: "₹1299",
-      duration: "10 Weeks",
+      duration: "8 Weeks",
       rating: "4.8",
     },
     {
       title: "Machine Learning",
       price: "₹1799",
-      duration: "12 Weeks",
+      duration: "8 Weeks",
       rating: "4.9",
     },
     {
       title: "Artificial Intelligence",
       price: "₹1999",
-      duration: "14 Weeks",
+      duration: "8 Weeks",
       rating: "4.9",
     },
-    {
-      title: "Agentic AI",
-      price: "₹2499",
-      duration: "10 Weeks",
-      rating: "4.9",
-    },
+    { title: "Agentic AI", price: "₹2499", duration: "8 Weeks", rating: "4.9" },
     {
       title: "System Design",
       price: "₹1799",
@@ -48,66 +38,26 @@ function Courses() {
     {
       title: "Cloud Computing",
       price: "₹1599",
-      duration: "10 Weeks",
+      duration: "8 Weeks",
       rating: "4.8",
     },
-    {
-      title: "AWS Cloud",
-      price: "₹1999",
-      duration: "12 Weeks",
-      rating: "4.9",
-    },
-    {
-      title: "DevOps",
-      price: "₹1699",
-      duration: "10 Weeks",
-      rating: "4.8",
-    },
-    {
-      title: "Java + DSA",
-      price: "₹1499",
-      duration: "12 Weeks",
-      rating: "4.9",
-    },
-    {
-      title: "MERN Stack",
-      price: "₹1999",
-      duration: "14 Weeks",
-      rating: "4.9",
-    },
+    { title: "AWS Cloud", price: "₹1999", duration: "8 Weeks", rating: "4.9" },
+    { title: "DevOps", price: "₹1699", duration: "8 Weeks", rating: "4.8" },
+    { title: "Java + DSA", price: "₹1499", duration: "8 Weeks", rating: "4.9" },
+    { title: "MERN Stack", price: "₹1999", duration: "8 Weeks", rating: "4.9" },
   ];
 
   const freeCourses = [
-    {
-      title: "HTML & CSS",
-      price: "Free",
-      duration: "4 Weeks",
-      rating: "4.7",
-    },
+    { title: "HTML & CSS", price: "Free", duration: "4 Weeks", rating: "4.7" },
     {
       title: "JavaScript Basics",
       price: "Free",
       duration: "6 Weeks",
       rating: "4.8",
     },
-    {
-      title: "PHP Basics",
-      price: "Free",
-      duration: "5 Weeks",
-      rating: "4.6",
-    },
-    {
-      title: "MySQL",
-      price: "Free",
-      duration: "4 Weeks",
-      rating: "4.7",
-    },
-    {
-      title: "DBMS",
-      price: "Free",
-      duration: "5 Weeks",
-      rating: "4.7",
-    },
+    { title: "PHP Basics", price: "Free", duration: "5 Weeks", rating: "4.6" },
+    { title: "MySQL", price: "Free", duration: "6 Weeks", rating: "4.7" },
+    { title: "DBMS", price: "Free", duration: "5 Weeks", rating: "4.7" },
     {
       title: "Data Structures & Algorithms",
       price: "Free",
@@ -135,7 +85,7 @@ function Courses() {
     {
       title: "Git & GitHub",
       price: "Free",
-      duration: "3 Weeks",
+      duration: "6 Weeks",
       rating: "4.7",
     },
     {
@@ -151,7 +101,6 @@ function Courses() {
       rating: "4.7",
     },
   ];
-
   return (
     <main className="max-w-7xl mx-auto px-6 py-10">
       <section className="mb-12">

@@ -24,7 +24,7 @@ function Footer() {
                 </a>
               </li>
               <li>
-                <a href="About" className="hover:text-white">
+                <a href="" className="hover:text-white">
                   About
                 </a>
               </li>

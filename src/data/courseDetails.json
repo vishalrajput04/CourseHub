@@ -1,0 +1,947 @@
+{
+  "React JS": {
+    "roadmap": [
+      "HTML & CSS Basics",
+      "JavaScript Fundamentals",
+      "ES6+ Concepts",
+      "React Fundamentals",
+      "Components & Props",
+      "State & Events",
+      "React Hooks",
+      "React Router",
+      "Forms & Validation",
+      "API Integration",
+      "Context API",
+      "Performance Optimization",
+      "Deployment",
+      "Final React Project"
+    ],
+    "description": "Learn React.js from the fundamentals to advanced concepts and build modern, responsive and interactive web applications.",
+    "overview": "This course covers React fundamentals, component architecture, hooks, routing, state management, API integration and deployment.",
+    "level": "Beginner to Intermediate",
+    "whatYouWillLearn": [
+      "Build reusable React components",
+      "Manage state using Hooks",
+      "Create multi-page applications with React Router",
+      "Work with REST APIs",
+      "Manage global state using Context API",
+      "Build responsive React applications",
+      "Deploy React applications"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "Web Fundamentals", "topics": ["HTML", "CSS", "Responsive Design"] },
+      { "week": 2, "title": "JavaScript", "topics": ["ES6", "Arrays", "Objects", "Functions"] },
+      { "week": 3, "title": "React Basics", "topics": ["Components", "JSX", "Props"] },
+      { "week": 4, "title": "State & Hooks", "topics": ["useState", "useEffect", "Events"] },
+      { "week": 5, "title": "Routing & Forms", "topics": ["React Router", "Forms", "Validation"] },
+      { "week": 6, "title": "APIs & Context", "topics": ["REST API", "Fetch", "Context API"] },
+      { "week": 7, "title": "Advanced React", "topics": ["Optimization", "Reusable Components", "Best Practices"] },
+      { "week": 8, "title": "Project & Deployment", "topics": ["Final Project", "GitHub", "Vercel Deployment"] }
+    ],
+    "prerequisites": ["Basic HTML", "Basic CSS", "Basic JavaScript"],
+    "projects": ["Todo Application", "Weather Application", "Course Platform"],
+    "careerScope": "React.js is widely used for frontend development and provides opportunities in frontend and full-stack development."
+  },
+
+  "Full Stack Development": {
+    "roadmap": [
+      "HTML & CSS",
+      "JavaScript",
+      "Git & GitHub",
+      "React.js",
+      "Node.js",
+      "Express.js",
+      "REST APIs",
+      "MongoDB",
+      "Authentication",
+      "MERN Stack",
+      "Deployment",
+      "Full Stack Project"
+    ],
+    "description": "Learn complete full-stack web development and build applications using modern frontend and backend technologies.",
+    "overview": "The course covers frontend development, backend development, databases, APIs, authentication and deployment.",
+    "level": "Intermediate",
+    "whatYouWillLearn": [
+      "Build responsive websites",
+      "Develop React applications",
+      "Create backend APIs",
+      "Work with MongoDB",
+      "Implement authentication",
+      "Connect frontend and backend",
+      "Deploy full-stack applications"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "Frontend Basics", "topics": ["HTML", "CSS", "JavaScript"] },
+      { "week": 2, "title": "Advanced JavaScript", "topics": ["ES6", "DOM", "Async JavaScript"] },
+      { "week": 3, "title": "React", "topics": ["Components", "Hooks", "Routing"] },
+      { "week": 4, "title": "Node.js", "topics": ["Node Basics", "Modules", "NPM"] },
+      { "week": 5, "title": "Express.js", "topics": ["Routes", "Middleware", "REST APIs"] },
+      { "week": 6, "title": "MongoDB", "topics": ["Database", "Collections", "CRUD"] },
+      { "week": 7, "title": "Authentication", "topics": ["JWT", "Login", "Authorization"] },
+      { "week": 8, "title": "Full Stack Project", "topics": ["Integration", "Testing", "Deployment"] }
+    ],
+    "prerequisites": ["Basic computer knowledge", "Basic programming knowledge"],
+    "projects": ["Blog Application", "E-commerce Website", "Course Management Platform"],
+    "careerScope": "Full-stack developers can work across frontend, backend and database development."
+  },
+
+  "Python for Data Science": {
+    "roadmap": [
+      "Python Basics",
+      "Variables & Data Types",
+      "Functions",
+      "Object-Oriented Programming",
+      "NumPy",
+      "Pandas",
+      "Data Cleaning",
+      "Data Visualization",
+      "Statistics",
+      "Exploratory Data Analysis",
+      "Machine Learning Basics",
+      "Data Science Project"
+    ],
+    "description": "Learn Python programming and use it for data analysis, visualization and introductory machine learning.",
+    "overview": "This course introduces Python and popular data science libraries such as NumPy, Pandas and Matplotlib.",
+    "level": "Beginner to Intermediate",
+    "whatYouWillLearn": [
+      "Write Python programs",
+      "Analyze datasets",
+      "Clean and transform data",
+      "Create visualizations",
+      "Perform exploratory data analysis",
+      "Understand basic machine learning"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "Python Basics", "topics": ["Variables", "Data Types", "Operators"] },
+      { "week": 2, "title": "Programming", "topics": ["Conditions", "Loops", "Functions"] },
+      { "week": 3, "title": "Python Advanced", "topics": ["OOP", "Modules", "Exceptions"] },
+      { "week": 4, "title": "NumPy", "topics": ["Arrays", "Operations", "Indexing"] },
+      { "week": 5, "title": "Pandas", "topics": ["DataFrames", "Data Cleaning", "Analysis"] },
+      { "week": 6, "title": "Visualization", "topics": ["Matplotlib", "Charts", "Plots"] },
+      { "week": 7, "title": "EDA", "topics": ["Statistics", "Patterns", "Insights"] },
+      { "week": 8, "title": "Project", "topics": ["Dataset Analysis", "Visualization", "Report"] }
+    ],
+    "prerequisites": ["Basic computer knowledge"],
+    "projects": ["Sales Data Analysis", "Student Performance Analysis", "COVID Data Analysis"],
+    "careerScope": "Python and data analysis skills are useful for data analyst, data scientist and machine learning roles."
+  },
+
+  "Machine Learning": {
+    "roadmap": [
+      "Python Programming",
+      "NumPy & Pandas",
+      "Statistics",
+      "Linear Algebra Basics",
+      "Data Preprocessing",
+      "Supervised Learning",
+      "Unsupervised Learning",
+      "Model Evaluation",
+      "Feature Engineering",
+      "Ensemble Learning",
+      "Model Deployment",
+      "Machine Learning Project"
+    ],
+    "description": "Learn the fundamentals of machine learning and build predictive models using Python.",
+    "overview": "The course covers data preprocessing, supervised and unsupervised learning, model evaluation and deployment.",
+    "level": "Intermediate",
+    "whatYouWillLearn": [
+      "Prepare datasets",
+      "Train machine learning models",
+      "Evaluate model performance",
+      "Perform feature engineering",
+      "Use classification and regression",
+      "Build ML projects"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "ML Fundamentals", "topics": ["Introduction", "Types of ML", "Workflow"] },
+      { "week": 2, "title": "Data Preparation", "topics": ["Pandas", "Cleaning", "Preprocessing"] },
+      { "week": 3, "title": "Regression", "topics": ["Linear Regression", "Multiple Regression"] },
+      { "week": 4, "title": "Classification", "topics": ["Logistic Regression", "KNN", "Decision Trees"] },
+      { "week": 5, "title": "Advanced Models", "topics": ["Random Forest", "SVM", "Ensemble Methods"] },
+      { "week": 6, "title": "Unsupervised Learning", "topics": ["Clustering", "K-Means", "PCA"] },
+      { "week": 7, "title": "Evaluation", "topics": ["Accuracy", "Precision", "Recall", "F1 Score"] },
+      { "week": 8, "title": "ML Project", "topics": ["Training", "Testing", "Deployment"] }
+    ],
+    "prerequisites": ["Python basics", "Basic mathematics"],
+    "projects": ["House Price Prediction", "Student Performance Prediction", "Customer Segmentation"],
+    "careerScope": "Machine learning skills can lead to roles involving data analysis, predictive modeling and AI development."
+  },
+
+  "Artificial Intelligence": {
+    "roadmap": [
+      "Python Programming",
+      "Mathematics for AI",
+      "Data Processing",
+      "Machine Learning",
+      "Deep Learning",
+      "Neural Networks",
+      "Natural Language Processing",
+      "Computer Vision",
+      "Generative AI",
+      "AI APIs",
+      "AI Applications",
+      "AI Project"
+    ],
+    "description": "Explore artificial intelligence concepts and learn how modern AI systems are developed and applied.",
+    "overview": "The course introduces machine learning, neural networks, NLP, computer vision and generative AI.",
+    "level": "Intermediate to Advanced",
+    "whatYouWillLearn": [
+      "Understand AI fundamentals",
+      "Work with machine learning models",
+      "Understand neural networks",
+      "Explore NLP and computer vision",
+      "Build AI-powered applications"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "AI Fundamentals", "topics": ["AI Introduction", "Applications", "AI Workflow"] },
+      { "week": 2, "title": "Mathematics", "topics": ["Probability", "Statistics", "Linear Algebra"] },
+      { "week": 3, "title": "Machine Learning", "topics": ["Supervised", "Unsupervised", "Evaluation"] },
+      { "week": 4, "title": "Neural Networks", "topics": ["Perceptron", "Neurons", "Training"] },
+      { "week": 5, "title": "Deep Learning", "topics": ["CNN", "RNN", "Deep Networks"] },
+      { "week": 6, "title": "NLP", "topics": ["Text Processing", "Embeddings", "Language Models"] },
+      { "week": 7, "title": "Generative AI", "topics": ["LLMs", "Prompting", "AI APIs"] },
+      { "week": 8, "title": "AI Project", "topics": ["Application Development", "Testing", "Deployment"] }
+    ],
+    "prerequisites": ["Python", "Basic mathematics"],
+    "projects": ["AI Chatbot", "Image Classification App", "AI Content Assistant"],
+    "careerScope": "AI skills are applicable in software development, automation, data science and intelligent applications."
+  },
+
+  "Agentic AI": {
+    "roadmap": [
+      "AI Fundamentals",
+      "Generative AI",
+      "Large Language Models",
+      "Prompt Engineering",
+      "Tool Calling",
+      "Function Calling",
+      "AI Agents",
+      "Memory & Context",
+      "RAG",
+      "Multi-Agent Systems",
+      "Agent Workflows",
+      "Agentic AI Project"
+    ],
+    "description": "Learn how AI agents can reason through tasks, use tools and work through multi-step workflows.",
+    "overview": "This course introduces LLMs, tool use, memory, retrieval-augmented generation and agent workflows.",
+    "level": "Intermediate to Advanced",
+    "whatYouWillLearn": [
+      "Understand AI agents",
+      "Work with LLM APIs",
+      "Build tool-using agents",
+      "Implement RAG systems",
+      "Design multi-step AI workflows"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "Generative AI", "topics": ["LLMs", "Tokens", "Context"] },
+      { "week": 2, "title": "Prompt Engineering", "topics": ["Prompts", "Few-shot", "Structured Output"] },
+      { "week": 3, "title": "Tools", "topics": ["Function Calling", "APIs", "Tool Usage"] },
+      { "week": 4, "title": "AI Agents", "topics": ["Agent Architecture", "Planning", "Execution"] },
+      { "week": 5, "title": "Memory", "topics": ["Conversation Memory", "Context", "State"] },
+      { "week": 6, "title": "RAG", "topics": ["Embeddings", "Vector Search", "Retrieval"] },
+      { "week": 7, "title": "Multi-Agent Systems", "topics": ["Agent Communication", "Workflows", "Orchestration"] },
+      { "week": 8, "title": "Agent Project", "topics": ["Agent Development", "Testing", "Deployment"] }
+    ],
+    "prerequisites": ["Python or JavaScript basics", "Basic AI concepts"],
+    "projects": ["Research Agent", "Customer Support Agent", "Task Automation Agent"],
+    "careerScope": "Agentic AI is useful for building intelligent automation, assistants and AI-powered business applications."
+  },
+
+  "System Design": {
+    "roadmap": [
+      "System Design Fundamentals",
+      "Requirements Analysis",
+      "Client Server Architecture",
+      "APIs",
+      "Databases",
+      "Caching",
+      "Load Balancing",
+      "Message Queues",
+      "Scalability",
+      "High Availability",
+      "Microservices",
+      "System Design Projects"
+    ],
+    "description": "Learn the principles used to design scalable, reliable and maintainable software systems.",
+    "overview": "The course covers architecture, databases, caching, scalability, distributed systems and microservices.",
+    "level": "Intermediate to Advanced",
+    "whatYouWillLearn": [
+      "Analyze system requirements",
+      "Design scalable architectures",
+      "Choose appropriate databases",
+      "Understand caching and load balancing",
+      "Design distributed systems"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "Fundamentals", "topics": ["Requirements", "Architecture", "Trade-offs"] },
+      { "week": 2, "title": "Web Architecture", "topics": ["Clients", "Servers", "APIs"] },
+      { "week": 3, "title": "Databases", "topics": ["SQL", "NoSQL", "Database Design"] },
+      { "week": 4, "title": "Caching", "topics": ["Caching", "CDN", "Redis Concepts"] },
+      { "week": 5, "title": "Scalability", "topics": ["Load Balancing", "Horizontal Scaling"] },
+      { "week": 6, "title": "Distributed Systems", "topics": ["Queues", "Replication", "Consistency"] },
+      { "week": 7, "title": "Microservices", "topics": ["Services", "Communication", "Resilience"] },
+      { "week": 8, "title": "Design Projects", "topics": ["Architecture Diagrams", "Trade-offs", "Case Studies"] }
+    ],
+    "prerequisites": ["Programming knowledge", "Basic databases", "Basic networking"],
+    "projects": ["URL Shortener", "Chat System", "Video Streaming Architecture"],
+    "careerScope": "System design knowledge is valuable for backend, full-stack and software engineering roles."
+  },
+
+  "Cloud Computing": {
+    "roadmap": [
+      "Cloud Fundamentals",
+      "Cloud Service Models",
+      "Virtualization",
+      "Networking",
+      "Storage",
+      "Databases",
+      "Security",
+      "Containers",
+      "Serverless",
+      "Monitoring",
+      "Cloud Deployment",
+      "Cloud Project"
+    ],
+    "description": "Learn the fundamentals of cloud computing and understand how applications are deployed and managed in the cloud.",
+    "overview": "This course covers cloud architecture, virtualization, storage, networking, containers and deployment.",
+    "level": "Beginner to Intermediate",
+    "whatYouWillLearn": [
+      "Understand cloud computing",
+      "Learn IaaS, PaaS and SaaS",
+      "Understand cloud networking",
+      "Work with cloud storage",
+      "Deploy applications"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "Cloud Basics", "topics": ["Cloud Computing", "Benefits", "Models"] },
+      { "week": 2, "title": "Virtualization", "topics": ["VMs", "Hypervisors", "Cloud Architecture"] },
+      { "week": 3, "title": "Networking", "topics": ["VPC", "IP", "Security Groups"] },
+      { "week": 4, "title": "Storage", "topics": ["Object Storage", "Block Storage", "File Storage"] },
+      { "week": 5, "title": "Databases", "topics": ["Cloud Databases", "Backup", "Replication"] },
+      { "week": 6, "title": "Containers", "topics": ["Docker", "Containers", "Images"] },
+      { "week": 7, "title": "Security", "topics": ["IAM", "Encryption", "Monitoring"] },
+      { "week": 8, "title": "Deployment", "topics": ["Cloud Deployment", "Monitoring", "Project"] }
+    ],
+    "prerequisites": ["Basic networking", "Basic Linux knowledge"],
+    "projects": ["Cloud Hosted Website", "Cloud Storage Application", "Containerized Web App"],
+    "careerScope": "Cloud skills are useful for cloud engineer, DevOps and software development roles."
+  },
+
+  "AWS Cloud": {
+    "roadmap": [
+      "AWS Fundamentals",
+      "IAM",
+      "EC2",
+      "S3",
+      "VPC",
+      "RDS",
+      "Lambda",
+      "CloudFront",
+      "Route 53",
+      "CloudWatch",
+      "Security",
+      "AWS Project"
+    ],
+    "description": "Learn the fundamentals of Amazon Web Services and deploy applications using core AWS services.",
+    "overview": "The course focuses on commonly used AWS services including EC2, S3, VPC, RDS, Lambda and CloudWatch.",
+    "level": "Beginner to Intermediate",
+    "whatYouWillLearn": [
+      "Understand AWS architecture",
+      "Launch EC2 instances",
+      "Use S3 storage",
+      "Configure networking",
+      "Work with managed databases",
+      "Monitor AWS resources"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "AWS Basics", "topics": ["AWS Console", "Regions", "Availability Zones"] },
+      { "week": 2, "title": "IAM", "topics": ["Users", "Roles", "Policies"] },
+      { "week": 3, "title": "EC2", "topics": ["Instances", "Security Groups", "Deployment"] },
+      { "week": 4, "title": "S3", "topics": ["Buckets", "Objects", "Storage Classes"] },
+      { "week": 5, "title": "Networking", "topics": ["VPC", "Subnets", "Routing"] },
+      { "week": 6, "title": "Databases", "topics": ["RDS", "Backups", "Database Connectivity"] },
+      { "week": 7, "title": "Serverless", "topics": ["Lambda", "API Gateway", "CloudFront"] },
+      { "week": 8, "title": "Monitoring & Project", "topics": ["CloudWatch", "Security", "Deployment"] }
+    ],
+    "prerequisites": ["Basic networking", "Basic Linux"],
+    "projects": ["AWS Hosted Website", "Serverless API", "Cloud Storage Application"],
+    "careerScope": "AWS knowledge is useful for cloud engineering, DevOps and backend development."
+  },
+
+  "DevOps": {
+    "roadmap": [
+      "Linux Basics",
+      "Git & GitHub",
+      "Shell Scripting",
+      "Docker",
+      "Docker Compose",
+      "CI/CD",
+      "Jenkins",
+      "Kubernetes",
+      "Cloud Deployment",
+      "Infrastructure Basics",
+      "Monitoring",
+      "DevOps Project"
+    ],
+    "description": "Learn DevOps practices and tools used to automate development, testing and deployment.",
+    "overview": "The course covers Git, Linux, Docker, CI/CD, Jenkins, Kubernetes and cloud deployment concepts.",
+    "level": "Intermediate",
+    "whatYouWillLearn": [
+      "Use Linux commands",
+      "Manage source code with Git",
+      "Create Docker containers",
+      "Build CI/CD pipelines",
+      "Understand Kubernetes",
+      "Deploy applications"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "Linux", "topics": ["Commands", "File System", "Permissions"] },
+      { "week": 2, "title": "Git", "topics": ["Git", "GitHub", "Branching"] },
+      { "week": 3, "title": "Docker", "topics": ["Images", "Containers", "Dockerfile"] },
+      { "week": 4, "title": "Docker Compose", "topics": ["Services", "Networks", "Volumes"] },
+      { "week": 5, "title": "CI/CD", "topics": ["Pipelines", "Automation", "Testing"] },
+      { "week": 6, "title": "Jenkins", "topics": ["Jobs", "Pipelines", "Automation"] },
+      { "week": 7, "title": "Kubernetes", "topics": ["Pods", "Deployments", "Services"] },
+      { "week": 8, "title": "Deployment", "topics": ["Cloud", "Monitoring", "Final Project"] }
+    ],
+    "prerequisites": ["Basic Linux", "Git basics", "Basic programming"],
+    "projects": ["Dockerized Web App", "CI/CD Pipeline", "Kubernetes Deployment"],
+    "careerScope": "DevOps skills are useful for DevOps engineer, cloud engineer and platform engineering roles."
+  },
+
+  "Java + DSA": {
+    "roadmap": [
+      "Java Basics",
+      "OOP in Java",
+      "Arrays",
+      "Strings",
+      "Searching",
+      "Sorting",
+      "Recursion",
+      "Linked List",
+      "Stack & Queue",
+      "Trees",
+      "Graphs",
+      "Dynamic Programming"
+    ],
+    "description": "Master Java programming and develop strong problem-solving skills through Data Structures and Algorithms.",
+    "overview": "The course combines Java programming with important DSA concepts and coding problem-solving techniques.",
+    "level": "Beginner to Advanced",
+    "whatYouWillLearn": [
+      "Write Java programs",
+      "Understand OOP",
+      "Implement data structures",
+      "Analyze algorithms",
+      "Solve coding problems",
+      "Prepare for technical interviews"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "Java Basics", "topics": ["Syntax", "Variables", "Conditions", "Loops"] },
+      { "week": 2, "title": "OOP", "topics": ["Classes", "Objects", "Inheritance", "Polymorphism"] },
+      { "week": 3, "title": "Arrays & Strings", "topics": ["Arrays", "Strings", "Two Pointer"] },
+      { "week": 4, "title": "Searching & Sorting", "topics": ["Binary Search", "Bubble Sort", "Merge Sort"] },
+      { "week": 5, "title": "Recursion & Linked List", "topics": ["Recursion", "Linked List", "Problems"] },
+      { "week": 6, "title": "Stack & Queue", "topics": ["Stack", "Queue", "Deque"] },
+      { "week": 7, "title": "Trees & Graphs", "topics": ["Binary Trees", "BST", "Graphs"] },
+      { "week": 8, "title": "DP & Problems", "topics": ["Dynamic Programming", "Problem Solving", "Interview Questions"] }
+    ],
+    "prerequisites": ["Basic programming knowledge"],
+    "projects": ["Student Management System", "Library Management System", "DSA Problem Collection"],
+    "careerScope": "Java and DSA are highly useful for software development and technical interview preparation."
+  },
+
+  "MERN Stack": {
+    "roadmap": [
+      "HTML & CSS",
+      "JavaScript",
+      "React.js",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "REST API",
+      "Authentication",
+      "Context API",
+      "Deployment",
+      "Testing",
+      "MERN Project"
+    ],
+    "description": "Learn full-stack JavaScript development using MongoDB, Express.js, React.js and Node.js.",
+    "overview": "This course teaches complete MERN stack development from frontend interfaces to backend APIs and database integration.",
+    "level": "Intermediate",
+    "whatYouWillLearn": [
+      "Build React interfaces",
+      "Create Node and Express APIs",
+      "Work with MongoDB",
+      "Implement authentication",
+      "Connect frontend and backend",
+      "Deploy MERN applications"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "JavaScript", "topics": ["ES6", "Async JS", "Modules"] },
+      { "week": 2, "title": "React", "topics": ["Components", "Hooks", "Routing"] },
+      { "week": 3, "title": "Node.js", "topics": ["Node", "NPM", "Modules"] },
+      { "week": 4, "title": "Express", "topics": ["Routes", "Middleware", "REST API"] },
+      { "week": 5, "title": "MongoDB", "topics": ["Collections", "CRUD", "Mongoose"] },
+      { "week": 6, "title": "Authentication", "topics": ["JWT", "Passwords", "Authorization"] },
+      { "week": 7, "title": "Integration", "topics": ["API Integration", "Error Handling", "Testing"] },
+      { "week": 8, "title": "Final Project", "topics": ["MERN App", "GitHub", "Deployment"] }
+    ],
+    "prerequisites": ["HTML", "CSS", "JavaScript basics"],
+    "projects": ["MERN Blog", "E-commerce Application", "Course Management System"],
+    "careerScope": "MERN stack development is useful for frontend, backend and full-stack JavaScript roles."
+  },
+
+  "HTML & CSS": {
+    "roadmap": [
+      "HTML Basics",
+      "Semantic HTML",
+      "Forms",
+      "CSS Basics",
+      "Selectors",
+      "Box Model",
+      "Flexbox",
+      "CSS Grid",
+      "Responsive Design",
+      "Animations",
+      "Media Queries",
+      "Website Project"
+    ],
+    "description": "Learn the foundation of web development by creating structured and responsive web pages with HTML and CSS.",
+    "overview": "The course covers HTML structure, CSS styling, layouts, responsive design and basic animations.",
+    "level": "Beginner",
+    "whatYouWillLearn": [
+      "Create HTML pages",
+      "Style websites with CSS",
+      "Build layouts using Flexbox and Grid",
+      "Create responsive websites",
+      "Add basic animations"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "HTML", "topics": ["Elements", "Attributes", "Semantic HTML"] },
+      { "week": 2, "title": "Forms", "topics": ["Forms", "Inputs", "Tables"] },
+      { "week": 3, "title": "CSS", "topics": ["Selectors", "Colors", "Fonts"] },
+      { "week": 4, "title": "Layouts", "topics": ["Flexbox", "Grid", "Positioning"] }
+    ],
+    "prerequisites": ["Basic computer knowledge"],
+    "projects": ["Personal Portfolio", "Landing Page", "Product Website"],
+    "careerScope": "HTML and CSS are essential foundations for frontend and web development."
+  },
+
+  "JavaScript Basics": {
+    "roadmap": [
+      "JavaScript Introduction",
+      "Variables",
+      "Data Types",
+      "Operators",
+      "Conditions",
+      "Loops",
+      "Functions",
+      "Arrays & Objects",
+      "DOM",
+      "Events",
+      "ES6",
+      "Async JavaScript"
+    ],
+    "description": "Learn JavaScript fundamentals and use it to create interactive web applications.",
+    "overview": "The course covers core JavaScript programming, DOM manipulation, events, ES6 and asynchronous programming.",
+    "level": "Beginner",
+    "whatYouWillLearn": [
+      "Write JavaScript programs",
+      "Work with arrays and objects",
+      "Manipulate the DOM",
+      "Handle browser events",
+      "Understand modern JavaScript"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "Basics", "topics": ["Variables", "Data Types", "Operators"] },
+      { "week": 2, "title": "Control Flow", "topics": ["Conditions", "Loops", "Functions"] },
+      { "week": 3, "title": "Data Structures", "topics": ["Arrays", "Objects", "Methods"] },
+      { "week": 4, "title": "DOM & Async", "topics": ["DOM", "Events", "Promises", "Async/Await"] },
+      { "week": 5, "title": "Modern JavaScript", "topics": ["ES6", "Modules", "Destructuring"] },
+      { "week": 6, "title": "Project", "topics": ["API", "DOM", "Final Project"] }
+    ],
+    "prerequisites": ["Basic HTML and CSS"],
+    "projects": ["Calculator", "To-Do App", "Weather App"],
+    "careerScope": "JavaScript is one of the core technologies for modern frontend and full-stack web development."
+  },
+
+  "PHP Basics": {
+    "roadmap": [
+      "PHP Introduction",
+      "Variables & Data Types",
+      "Conditions",
+      "Loops",
+      "Functions",
+      "Arrays",
+      "Forms",
+      "Sessions",
+      "MySQL Integration",
+      "CRUD",
+      "Authentication",
+      "PHP Project"
+    ],
+    "description": "Learn PHP fundamentals and build dynamic server-side web applications.",
+    "overview": "The course introduces PHP programming, forms, sessions, databases and CRUD operations.",
+    "level": "Beginner",
+    "whatYouWillLearn": [
+      "Write PHP programs",
+      "Process forms",
+      "Manage sessions",
+      "Connect PHP with MySQL",
+      "Build CRUD applications"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "PHP Basics", "topics": ["Syntax", "Variables", "Data Types"] },
+      { "week": 2, "title": "Control Flow", "topics": ["Conditions", "Loops", "Functions"] },
+      { "week": 3, "title": "Arrays & Forms", "topics": ["Arrays", "Forms", "Validation"] },
+      { "week": 4, "title": "Database", "topics": ["MySQL", "CRUD", "Sessions"] },
+      { "week": 5, "title": "Project", "topics": ["Authentication", "CRUD", "Deployment"] }
+    ],
+    "prerequisites": ["Basic HTML", "Basic programming"],
+    "projects": ["Contact Form", "Student Management System", "PHP Blog"],
+    "careerScope": "PHP remains useful for server-side web development and maintaining PHP-based applications."
+  },
+
+  "MySQL": {
+    "roadmap": [
+      "Database Fundamentals",
+      "SQL Basics",
+      "SELECT Queries",
+      "Filtering & Sorting",
+      "Joins",
+      "Functions",
+      "Subqueries",
+      "Indexes",
+      "Transactions",
+      "Normalization",
+      "Database Design",
+      "SQL Project"
+    ],
+    "description": "Learn MySQL and SQL for storing, querying and managing relational data.",
+    "overview": "The course covers SQL queries, joins, database design, normalization, indexes and transactions.",
+    "level": "Beginner to Intermediate",
+    "whatYouWillLearn": [
+      "Create databases and tables",
+      "Write SQL queries",
+      "Use joins",
+      "Design relational databases",
+      "Use indexes and transactions"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "SQL Basics", "topics": ["Database", "Tables", "CREATE", "INSERT"] },
+      { "week": 2, "title": "Queries", "topics": ["SELECT", "WHERE", "ORDER BY", "GROUP BY"] },
+      { "week": 3, "title": "Joins", "topics": ["INNER JOIN", "LEFT JOIN", "RIGHT JOIN"] },
+      { "week": 4, "title": "Advanced SQL", "topics": ["Subqueries", "Functions", "Views"] },
+      { "week": 5, "title": "Database Design", "topics": ["Normalization", "Indexes", "Keys"] },
+      { "week": 6, "title": "Transactions & Project", "topics": ["Transactions", "Security", "Project"] }
+    ],
+    "prerequisites": ["Basic computer knowledge"],
+    "projects": ["Student Database", "Library Database", "E-commerce Database"],
+    "careerScope": "SQL and MySQL skills are important for backend, data and database-related development roles."
+  },
+
+  "DBMS": {
+    "roadmap": [
+      "Database Introduction",
+      "DBMS Architecture",
+      "ER Model",
+      "Relational Model",
+      "Keys",
+      "SQL",
+      "Normalization",
+      "Transactions",
+      "Concurrency Control",
+      "Indexing",
+      "Recovery",
+      "Database Design"
+    ],
+    "description": "Understand database management systems, relational models, normalization and transaction management.",
+    "overview": "This course focuses on the theoretical and practical concepts required to understand database systems.",
+    "level": "Beginner to Intermediate",
+    "whatYouWillLearn": [
+      "Understand DBMS architecture",
+      "Design ER diagrams",
+      "Understand keys and relationships",
+      "Apply normalization",
+      "Understand transactions and concurrency"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "DBMS Basics", "topics": ["DBMS", "Architecture", "Data Models"] },
+      { "week": 2, "title": "ER Model", "topics": ["Entities", "Relationships", "ER Diagram"] },
+      { "week": 3, "title": "Relational Model", "topics": ["Tables", "Keys", "Constraints"] },
+      { "week": 4, "title": "Normalization", "topics": ["1NF", "2NF", "3NF", "BCNF"] },
+      { "week": 5, "title": "Transactions", "topics": ["ACID", "Concurrency", "Locks"] }
+    ],
+    "prerequisites": ["Basic database knowledge"],
+    "projects": ["ER Diagram Design", "College Database Design"],
+    "careerScope": "DBMS knowledge is important for software development, database development and technical interviews."
+  },
+
+  "Data Structures & Algorithms": {
+    "roadmap": [
+      "Programming Basics",
+      "Arrays",
+      "Strings",
+      "Searching",
+      "Sorting",
+      "Recursion",
+      "Linked List",
+      "Stack & Queue",
+      "Trees",
+      "Graphs",
+      "Greedy Algorithms",
+      "Dynamic Programming"
+    ],
+    "description": "Build strong problem-solving skills by learning important data structures and algorithms.",
+    "overview": "The course progresses from arrays and sorting to trees, graphs, greedy algorithms and dynamic programming.",
+    "level": "Beginner to Advanced",
+    "whatYouWillLearn": [
+      "Analyze time and space complexity",
+      "Implement common data structures",
+      "Solve algorithmic problems",
+      "Understand recursion and dynamic programming",
+      "Prepare for coding interviews"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "Arrays", "topics": ["Arrays", "Searching", "Two Pointer"] },
+      { "week": 2, "title": "Sorting", "topics": ["Bubble Sort", "Selection Sort", "Merge Sort"] },
+      { "week": 3, "title": "Recursion", "topics": ["Recursion", "Backtracking", "Problems"] },
+      { "week": 4, "title": "Linked List", "topics": ["Singly", "Doubly", "Circular"] },
+      { "week": 5, "title": "Stack & Queue", "topics": ["Stack", "Queue", "Deque"] },
+      { "week": 6, "title": "Trees", "topics": ["Binary Tree", "BST", "Traversal"] },
+      { "week": 7, "title": "Graphs", "topics": ["BFS", "DFS", "Shortest Path"] },
+      { "week": 8, "title": "Advanced", "topics": ["Greedy", "Dynamic Programming", "Problems"] }
+    ],
+    "prerequisites": ["Basic programming"],
+    "projects": ["DSA Problem Solver", "Algorithm Visualizer"],
+    "careerScope": "DSA is essential for technical interviews and software engineering roles."
+  },
+
+  "C Programming": {
+    "roadmap": [
+      "C Introduction",
+      "Variables & Data Types",
+      "Operators",
+      "Conditions",
+      "Loops",
+      "Functions",
+      "Arrays",
+      "Strings",
+      "Pointers",
+      "Structures",
+      "File Handling",
+      "C Project"
+    ],
+    "description": "Learn C programming fundamentals and develop a strong foundation in programming concepts.",
+    "overview": "The course covers procedural programming, arrays, pointers, structures and file handling.",
+    "level": "Beginner",
+    "whatYouWillLearn": [
+      "Write C programs",
+      "Use functions and arrays",
+      "Understand pointers",
+      "Work with structures",
+      "Handle files"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "Basics", "topics": ["Syntax", "Variables", "Data Types"] },
+      { "week": 2, "title": "Control Flow", "topics": ["Conditions", "Loops"] },
+      { "week": 3, "title": "Functions & Arrays", "topics": ["Functions", "Arrays", "Strings"] },
+      { "week": 4, "title": "Pointers", "topics": ["Pointers", "Memory", "Pointer Arithmetic"] },
+      { "week": 5, "title": "Structures", "topics": ["Structures", "Unions", "Enums"] },
+      { "week": 6, "title": "Project", "topics": ["File Handling", "Mini Project"] }
+    ],
+    "prerequisites": ["Basic computer knowledge"],
+    "projects": ["Student Management System", "Banking System", "Library System"],
+    "careerScope": "C provides strong programming fundamentals and is useful for systems and embedded programming."
+  },
+
+  "Java Programming": {
+    "roadmap": [
+      "Java Introduction",
+      "Variables & Data Types",
+      "Conditions & Loops",
+      "Arrays",
+      "Methods",
+      "Classes & Objects",
+      "Inheritance",
+      "Polymorphism",
+      "Interfaces",
+      "Exception Handling",
+      "Collections",
+      "Java Project"
+    ],
+    "description": "Learn Java programming from basics to object-oriented programming and collections.",
+    "overview": "The course covers Java syntax, OOP, exception handling and the Collections Framework.",
+    "level": "Beginner to Intermediate",
+    "whatYouWillLearn": [
+      "Write Java programs",
+      "Understand object-oriented programming",
+      "Use interfaces and inheritance",
+      "Handle exceptions",
+      "Work with collections"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "Java Basics", "topics": ["Syntax", "Variables", "Data Types"] },
+      { "week": 2, "title": "Control Flow", "topics": ["Conditions", "Loops", "Methods"] },
+      { "week": 3, "title": "Arrays", "topics": ["Arrays", "Strings", "Problems"] },
+      { "week": 4, "title": "OOP", "topics": ["Classes", "Objects", "Inheritance"] },
+      { "week": 5, "title": "Advanced OOP", "topics": ["Polymorphism", "Interfaces", "Abstraction"] },
+      { "week": 6, "title": "Collections", "topics": ["List", "Set", "Map"] },
+      { "week": 7, "title": "Exceptions", "topics": ["Exception Handling", "Files", "Packages"] },
+      { "week": 8, "title": "Project", "topics": ["Application Development", "Testing"] }
+    ],
+    "prerequisites": ["Basic programming knowledge"],
+    "projects": ["Bank Management System", "Student Management System", "Library Management System"],
+    "careerScope": "Java is widely used in backend development, enterprise applications and Android-related development."
+  },
+
+  "Python Basics": {
+    "roadmap": [
+      "Python Introduction",
+      "Variables",
+      "Data Types",
+      "Operators",
+      "Conditions",
+      "Loops",
+      "Functions",
+      "Lists & Tuples",
+      "Dictionaries & Sets",
+      "OOP",
+      "Modules",
+      "Python Project"
+    ],
+    "description": "Learn Python programming from the basics and build a strong foundation for development and data science.",
+    "overview": "The course covers Python syntax, data structures, functions, OOP and modules.",
+    "level": "Beginner",
+    "whatYouWillLearn": [
+      "Write Python programs",
+      "Use built-in data structures",
+      "Create functions",
+      "Understand OOP",
+      "Build Python applications"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "Python Basics", "topics": ["Syntax", "Variables", "Data Types"] },
+      { "week": 2, "title": "Control Flow", "topics": ["Conditions", "Loops"] },
+      { "week": 3, "title": "Functions", "topics": ["Functions", "Arguments", "Lambda"] },
+      { "week": 4, "title": "Collections", "topics": ["Lists", "Tuples", "Sets", "Dictionaries"] },
+      { "week": 5, "title": "OOP", "topics": ["Classes", "Objects", "Inheritance"] },
+      { "week": 6, "title": "Project", "topics": ["Modules", "Files", "Final Project"] }
+    ],
+    "prerequisites": ["Basic computer knowledge"],
+    "projects": ["Calculator", "Quiz Application", "Student Management System"],
+    "careerScope": "Python is useful for web development, automation, data science, AI and scripting."
+  },
+
+  "Git & GitHub": {
+    "roadmap": [
+      "Version Control Basics",
+      "Git Installation",
+      "Repositories",
+      "Git Workflow",
+      "Commit & History",
+      "Branches",
+      "Merge",
+      "GitHub",
+      "Remote Repositories",
+      "Pull Requests",
+      "Collaboration",
+      "Git Project"
+    ],
+    "description": "Learn Git and GitHub for version control, collaboration and managing software projects.",
+    "overview": "The course covers Git commands, branching, merging, remote repositories and collaborative workflows.",
+    "level": "Beginner",
+    "whatYouWillLearn": [
+      "Create Git repositories",
+      "Track project changes",
+      "Work with branches",
+      "Push projects to GitHub",
+      "Collaborate using pull requests"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "Git Basics", "topics": ["Installation", "Repository", "Status"] },
+      { "week": 2, "title": "Commits", "topics": ["Add", "Commit", "Log"] },
+      { "week": 3, "title": "Branches", "topics": ["Branch", "Checkout", "Merge"] },
+      { "week": 4, "title": "GitHub", "topics": ["Remote", "Push", "Pull", "Clone"] },
+      { "week": 5, "title": "Collaboration", "topics": ["Pull Requests", "Issues", "Projects"] },
+      { "week": 6, "title": "Project", "topics": ["Git Workflow", "Deployment", "Best Practices"] }
+    ],
+    "prerequisites": ["Basic computer knowledge"],
+    "projects": ["Git Portfolio Repository", "Team GitHub Project"],
+    "careerScope": "Git and GitHub are essential tools for modern software development and team collaboration."
+  },
+
+  "Computer Networks": {
+    "roadmap": [
+      "Networking Fundamentals",
+      "Network Models",
+      "OSI Model",
+      "TCP/IP Model",
+      "IP Addressing",
+      "Subnetting",
+      "TCP & UDP",
+      "DNS & DHCP",
+      "HTTP & HTTPS",
+      "Routing",
+      "Network Security",
+      "Networking Project"
+    ],
+    "description": "Understand how computer networks communicate and how data travels between devices.",
+    "overview": "The course covers OSI and TCP/IP models, addressing, protocols, routing and basic network security.",
+    "level": "Beginner to Intermediate",
+    "whatYouWillLearn": [
+      "Understand networking models",
+      "Learn IP addressing",
+      "Understand TCP and UDP",
+      "Learn common network protocols",
+      "Understand routing and security"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "Networking Basics", "topics": ["Networks", "LAN", "WAN", "Devices"] },
+      { "week": 2, "title": "OSI Model", "topics": ["Seven Layers", "Functions", "Protocols"] },
+      { "week": 3, "title": "TCP/IP", "topics": ["TCP", "UDP", "IP"] },
+      { "week": 4, "title": "IP Addressing", "topics": ["IPv4", "IPv6", "Subnetting"] },
+      { "week": 5, "title": "Protocols", "topics": ["DNS", "DHCP", "HTTP", "HTTPS"] }
+    ],
+    "prerequisites": ["Basic computer knowledge"],
+    "projects": ["Network Topology Design", "Packet Analysis Exercise"],
+    "careerScope": "Networking knowledge is useful for software, network administration, cloud and cybersecurity roles."
+  },
+
+  "Operating Systems": {
+    "roadmap": [
+      "OS Fundamentals",
+      "Process Management",
+      "CPU Scheduling",
+      "Threads",
+      "Synchronization",
+      "Deadlocks",
+      "Memory Management",
+      "Virtual Memory",
+      "File Systems",
+      "Disk Scheduling",
+      "Security",
+      "OS Concepts Project"
+    ],
+    "description": "Learn the fundamental concepts of operating systems and understand how computers manage resources.",
+    "overview": "The course covers processes, scheduling, synchronization, deadlocks, memory management and file systems.",
+    "level": "Beginner to Intermediate",
+    "whatYouWillLearn": [
+      "Understand operating system architecture",
+      "Learn process management",
+      "Understand CPU scheduling",
+      "Learn memory management",
+      "Understand file systems"
+    ],
+    "weekWiseTopics": [
+      { "week": 1, "title": "OS Basics", "topics": ["OS Functions", "Types", "System Calls"] },
+      { "week": 2, "title": "Processes", "topics": ["Process", "PCB", "Threads"] },
+      { "week": 3, "title": "Scheduling", "topics": ["FCFS", "SJF", "Round Robin"] },
+      { "week": 4, "title": "Synchronization", "topics": ["Critical Section", "Semaphores", "Mutex"] },
+      { "week": 5, "title": "Deadlocks", "topics": ["Conditions", "Prevention", "Avoidance"] }
+    ],
+    "prerequisites": ["Basic computer architecture"],
+    "projects": ["CPU Scheduling Simulator", "Memory Allocation Simulator"],
+    "careerScope": "Operating system concepts are important for software engineering, systems programming and technical interviews."
+  }
+}

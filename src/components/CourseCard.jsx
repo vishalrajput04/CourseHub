@@ -1,6 +1,8 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 function CourseCard({ course }) {
+  const navigate = useNavigate();
   return (
     <div className="bg-gray-200 rounded-xl shadow-md overflow-hidden">
       <div className="p-4">
@@ -16,7 +18,10 @@ function CourseCard({ course }) {
         <div className="flex justify-between items-center mt-4">
           <span className="text-xl font-bold">{course.price}</span>
 
-          <button className="bg-blue-600 cursor-pointer text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+          <button
+            onClick={() => navigate("/ViewCourse", { state: { course } })}
+            className="bg-blue-600 cursor-pointer text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+          >
             View Course
           </button>
         </div>
