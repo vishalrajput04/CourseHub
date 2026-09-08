@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-
+  const onSubmit = (data) => {
     const users = JSON.parse(localStorage.getItem("users")) || [];
 
     const user = users.find(
-      (user) => user.email === email && user.password === password,
+      (user) => user.email === data.email && user.password === data.password,
     );
 
     if (!user) {
@@ -39,28 +40,40 @@ const Login = () => {
           Login to access your courses
         </p>
 
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {/* Email */}
           <label className="block font-medium mb-2">Email</label>
 
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
-            className="w-full border rounded-lg px-4 py-3 mb-4 outline-none focus:ring-2 focus:ring-blue-500"
-            required
+            className="w-full border rounded-lg px-4 py-3 mb-1 outline-none focus:ring-2 focus:ring-blue-500"
+            {...register("email", {
+              required: "Email is required",
+            })}
           />
 
+          {errors.email && (
+            <p className="text-red-500 text-sm mb-4">{errors.email.message}</p>
+          )}
+
+          {/* Password */}
           <label className="block font-medium mb-2">Password</label>
 
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter your password"
-            className="w-full border rounded-lg px-4 py-3 mb-6 outline-none focus:ring-2 focus:ring-blue-500"
-            required
+            className="w-full border rounded-lg px-4 py-3 mb-1 outline-none focus:ring-2 focus:ring-blue-500"
+            {...register("password", {
+              required: "Password is required",
+            })}
           />
+
+          {errors.password && (
+            <p className="text-red-500 text-sm mb-6">
+              {errors.password.message}
+            </p>
+          )}
 
           <button
             type="submit"

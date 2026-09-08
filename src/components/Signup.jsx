@@ -1,19 +1,19 @@
-import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const navigate = useNavigate();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const handleSignup = (e) => {
-    e.preventDefault();
-
+  const onSubmit = (data) => {
     const users = JSON.parse(localStorage.getItem("users")) || [];
 
-    const alreadyExists = users.find((user) => user.email === email);
+    const alreadyExists = users.find((user) => user.email === data.email);
 
     if (alreadyExists) {
       alert("User already exists!");
@@ -22,9 +22,9 @@ const Signup = () => {
 
     const newUser = {
       id: Date.now(),
-      name,
-      email,
-      password,
+      name: data.name,
+      email: data.email,
+      password: data.password,
       enrolledCourses: [],
     };
 
@@ -48,39 +48,60 @@ const Signup = () => {
           Signup to start learning
         </p>
 
-        <form onSubmit={handleSignup}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          {/* Name */}
           <label className="block font-medium mb-2">Name</label>
 
           <input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
             placeholder="Enter your name"
-            className="w-full border rounded-lg px-4 py-3 mb-4 outline-none focus:ring-2 focus:ring-blue-500"
-            required
+            className="w-full border rounded-lg px-4 py-3 mb-1 outline-none focus:ring-2 focus:ring-blue-500"
+            {...register("name", {
+              required: "Name is required",
+            })}
           />
 
+          {errors.name && (
+            <p className="text-red-500 text-sm mb-4">{errors.name.message}</p>
+          )}
+
+          {/* Email */}
           <label className="block font-medium mb-2">Email</label>
 
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
-            className="w-full border rounded-lg px-4 py-3 mb-4 outline-none focus:ring-2 focus:ring-blue-500"
-            required
+            className="w-full border rounded-lg px-4 py-3 mb-1 outline-none focus:ring-2 focus:ring-blue-500"
+            {...register("email", {
+              required: "Email is required",
+            })}
           />
 
+          {errors.email && (
+            <p className="text-red-500 text-sm mb-4">{errors.email.message}</p>
+          )}
+
+          {/* Password */}
           <label className="block font-medium mb-2">Password</label>
 
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
             placeholder="Create password"
-            className="w-full border rounded-lg px-4 py-3 mb-6 outline-none focus:ring-2 focus:ring-blue-500"
-            required
+            className="w-full border rounded-lg px-4 py-3 mb-1 outline-none focus:ring-2 focus:ring-blue-500"
+            {...register("password", {
+              required: "Password is required",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters",
+              },
+            })}
           />
+
+          {errors.password && (
+            <p className="text-red-500 text-sm mb-6">
+              {errors.password.message}
+            </p>
+          )}
 
           <button
             type="submit"
