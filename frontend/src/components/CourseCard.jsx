@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 function CourseCard({ course }) {
   const navigate = useNavigate();
@@ -8,7 +7,7 @@ function CourseCard({ course }) {
       <div className="p-4">
         <h2 className="text-xl font-bold">{course.title}</h2>
         <p className="text-gray-500 text-sm mt-2">
-          Learn React from beginner to advanced.
+          {course.description || `Explore the ${course.title} course.`}
         </p>
 
         <div className="flex justify-between mt-4 text-sm">
@@ -19,7 +18,7 @@ function CourseCard({ course }) {
           <span className="text-xl font-bold">{course.price}</span>
 
           <button
-            onClick={() => navigate("/ViewCourse", { state: { course } })}
+            onClick={() => navigate(`/ViewCourse/${course.id}`)}
             className="bg-blue-600 cursor-pointer text-white px-4 py-2 rounded-lg hover:bg-blue-700"
           >
             View Course

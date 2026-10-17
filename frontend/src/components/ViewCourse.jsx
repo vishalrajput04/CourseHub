@@ -1,16 +1,36 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import courseDetails from "../data/courseDetails.json";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { apiRequest } from "../lib/api.js";
 
 const ViewCourse = () => {
-  const location = useLocation();
   const navigate = useNavigate();
+  const { id } = useParams();
+  const [course, setCourse] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
 
-  // CourseCard se aaya hua course
-  const course = location.state?.course;
+  useEffect(() => {
+    let active = true;
+    setLoading(true);
+    apiRequest(`/courses/${encodeURIComponent(id)}`)
+      .then(({ course: courseDetails }) => {
+        if (active) setCourse(courseDetails);
+      })
+      .catch((error) => {
+        if (active) setLoadError(error.message);
+      })
+      .finally(() => {
+        if (active) setLoading(false);
+      });
+    return () => { active = false; };
+  }, [id]);
 
-  // Course title ke according detailed information
-  const details = course ? courseDetails[course.title] : null;
+  const details = course;
+
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center bg-gray-100">Loading course...</div>;
+  }
 
   // Agar course nahi mila
   if (!course || !details) {
@@ -18,7 +38,7 @@ const ViewCourse = () => {
       <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-4 text-red-500">
-            Course Not Found
+            {loadError || "Course Not Found"}
           </h2>
 
           <button
@@ -199,49 +219,18 @@ const ViewCourse = () => {
           <div className="border-t pt-6">
             <button
               className="w-full md:w-auto bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
-              onClick={() => {
-                const currentUser = JSON.parse(
-                  localStorage.getItem("currentUser"),
-                );
-
-                if (!currentUser) {
+              onClick={async () => {
+                if (!localStorage.getItem("coursehubToken")) {
                   navigate("/login");
                   return;
                 }
-
-                const alreadyEnrolled = currentUser.enrolledCourses?.some(
-                  (item) => item.title === course.title,
-                );
-
-                if (alreadyEnrolled) {
-                  alert("You are already enrolled in this course!");
-                  return;
+                try {
+                  await apiRequest(`/me/courses/${encodeURIComponent(course.id)}`, { method: "POST" });
+                  alert(`Enrolled in ${course.title}`);
+                  navigate("/my-courses");
+                } catch (error) {
+                  alert(error.message);
                 }
-
-                const updatedUser = {
-                  ...currentUser,
-                  enrolledCourses: [
-                    ...(currentUser.enrolledCourses || []),
-                    course,
-                  ],
-                };
-
-                localStorage.setItem(
-                  "currentUser",
-                  JSON.stringify(updatedUser),
-                );
-
-                const users = JSON.parse(localStorage.getItem("users")) || [];
-
-                const updatedUsers = users.map((user) =>
-                  user.id === currentUser.id ? updatedUser : user,
-                );
-
-                localStorage.setItem("users", JSON.stringify(updatedUsers));
-
-                alert(`Enrolled in ${course.title}`);
-
-                navigate("/my-courses");
               }}
             >
               Enroll Now

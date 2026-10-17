@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
-import Home from "./components/Home.jsx";
 import Courses from "./components/Courses.jsx";
 import ComponentDescription from "./components/ComponentDescription.jsx";
 import PageTransition from "./components/PageTransition.jsx";
@@ -21,7 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<ComponentDescription />} />
             <Route path="/courses" element={<Courses />} />
-            <Route path="/ViewCourse" element={<ViewCourse />} />
+            <Route path="/ViewCourse/:id" element={<ViewCourse />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/my-courses" element={<MyCourses />} />

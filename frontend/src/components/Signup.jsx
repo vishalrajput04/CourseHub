@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { apiRequest } from "../lib/api.js";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -10,31 +11,17 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-
-    const alreadyExists = users.find((user) => user.email === data.email);
-
-    if (alreadyExists) {
-      alert("User already exists!");
-      return;
+  const onSubmit = async (data) => {
+    try {
+      await apiRequest("/auth/signup", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+      alert("Signup successful! Please login.");
+      navigate("/login");
+    } catch (error) {
+      alert(error.message);
     }
-
-    const newUser = {
-      id: Date.now(),
-      name: data.name,
-      email: data.email,
-      password: data.password,
-      enrolledCourses: [],
-    };
-
-    users.push(newUser);
-
-    localStorage.setItem("users", JSON.stringify(users));
-
-    alert("Signup successful! Please login.");
-
-    navigate("/login");
   };
 
   return (

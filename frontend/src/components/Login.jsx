@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
+import { apiRequest } from "../lib/api.js";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -10,23 +11,17 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-
-    const user = users.find(
-      (user) => user.email === data.email && user.password === data.password,
-    );
-
-    if (!user) {
-      alert("Invalid email or password!");
-      return;
+  const onSubmit = async (data) => {
+    try {
+      const { token } = await apiRequest("/auth/login", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+      localStorage.setItem("coursehubToken", token);
+      navigate("/my-courses");
+    } catch (error) {
+      alert(error.message);
     }
-
-    localStorage.setItem("currentUser", JSON.stringify(user));
-
-    alert("Login successful!");
-
-    navigate("/my-courses");
   };
 
   return (
