@@ -1,6 +1,6 @@
 # CourseHub
 
-CourseHub is a course catalog and enrollment app. Visitors can browse free and paid courses, inspect course plans, create an account, sign in, enroll, and see their enrolled courses. The frontend is a React single page app; the backend is an Express JSON API with a SQLite database.
+CourseHub is a course catalog and enrollment app. Visitors can browse free and paid courses, inspect course plans, create an account, sign in, enroll, and see their enrolled courses. The frontend is a React single page app; the backend is an Express JSON API using MongoDB through Mongoose.
 
 ## Contents
 
@@ -12,7 +12,7 @@ CourseHub is a course catalog and enrollment app. Visitors can browse free and p
 - [Database](#database)
 - [Run locally](#run-locally)
 - [API routes](#api-routes)
-- [Build for production](#build-for-production)
+- [Deploy to Vercel](#deploy-to-vercel-with-mongodb-atlas)
 - [Current scope](#current-scope)
 
 ## Features
@@ -34,11 +34,11 @@ CourseHub is a course catalog and enrollment app. Visitors can browse free and p
 | Frontend | React Hook Form | Reads and validates signup and login forms. |
 | Frontend | Tailwind CSS | Styles the existing responsive UI using utility classes. |
 | Frontend tooling | Vite | Runs the frontend development server and creates production assets. |
-| API | Express 5 | Defines the HTTP API and serves the production frontend build. |
+| API | Express 5 | Defines the HTTP API and is deployed as a Vercel Function. |
 | Backend architecture | MVC | Models handle data, controllers handle requests, and React is the View. Routes connect URLs to controllers. |
-| Database | SQLite with Node's `node:sqlite` | Stores users, courses, and enrollments in a local database file. |
+| Database | MongoDB Atlas or local MongoDB, through Mongoose | Stores users, courses, and enrollments as MongoDB documents. |
 | Authentication | bcryptjs and JWT | Hashes account passwords and issues signed bearer tokens after login. |
-| Configuration | dotenv | Loads local backend settings from `backend/.env`. |
+| Configuration | dotenv and CORS | Loads backend settings and allows the deployed frontend origin to call the API. |
 
 ## Architecture
 
@@ -46,7 +46,7 @@ The backend follows MVC with routes and middleware around it:
 
 1. A **Route** matches an HTTP method and URL, such as `POST /api/auth/login`.
 2. A **Controller** validates the request, calls the required model, and creates the JSON response.
-3. A **Model** reads or writes records in SQLite.
+3. A **Model** validates and reads or writes MongoDB documents through Mongoose.
 4. The **View** is the React frontend. It calls the API and renders the response.
 
 Authentication middleware checks bearer tokens before protected enrollment routes. The frontend and API exchange JSON. During development, Vite forwards `/api` requests to the backend.
@@ -59,7 +59,7 @@ CourseHub/
 ├── backend/
 │   ├── config/
 │   │   ├── auth.js                 # create and verify JWTs
-│   │   ├── database.js             # SQLite connection, schema, course seeding
+│   │   ├── database.js             # Mongoose connection and catalog seeding
 │   │   └── env.js                  # environment settings and port
 │   ├── controllers/
 │   │   ├── authController.js       # signup, login, current user
@@ -68,13 +68,15 @@ CourseHub/
 │   ├── data/
 │   │   ├── courseCatalog.json      # course title, price, duration, rating
 │   │   ├── courseDetails.json      # course descriptions and learning plans
-│   │   └── coursehub.sqlite        # generated database (created on first run)
 │   ├── middleware/
 │   │   └── requireAuth.js          # verifies the bearer token
 │   ├── models/
-│   │   ├── courseModel.js          # course queries
+│   │   ├── Course.js               # Mongoose course schema
+│   │   ├── Enrollment.js           # Mongoose enrollment schema and index
+│   │   ├── User.js                 # Mongoose user schema
+│   │   ├── courseModel.js          # course queries and response mapping
 │   │   ├── enrollmentModel.js      # enrollment queries
-│   │   └── userModel.js            # account queries
+│   │   └── userModel.js            # account queries and public mapping
 │   ├── routes/
 │   │   ├── authRoutes.js           # /api/auth/*
 │   │   ├── courseRoutes.js         # /api/courses/*
@@ -110,49 +112,45 @@ CourseHub/
 ## How the app works
 
 1. **Start:** `main.jsx` mounts React inside `BrowserRouter`; `App.jsx` maps URLs to page components.
-2. **Load courses:** `Courses.jsx` calls `apiRequest('/courses')`. The Vite proxy sends it to `GET /api/courses`; the controller gets records through `courseModel`.
+2. **Load courses:** `Courses.jsx` calls `apiRequest('/courses')`. Locally, Vite proxies it to `GET /api/courses`; the controller gets records through `courseModel`.
 3. **Open details:** each course has a slug ID, for example `/ViewCourse/react-js`. `ViewCourse.jsx` asks `GET /api/courses/react-js`, so refreshing the page still loads that course.
 4. **Sign up:** `Signup.jsx` posts name, email, and password. The controller hashes the password with bcryptjs and the model saves the user.
 5. **Sign in:** `Login.jsx` posts email and password. If they match, the API returns a JWT. The frontend keeps the token and sends it as `Authorization: Bearer <token>` on later requests.
 6. **Protect account actions:** `requireAuth.js` verifies that token and attaches the matching user to the request.
-7. **Enroll:** `ViewCourse.jsx` posts to `/api/me/courses/:id`. The enrollment model links the user and course in SQLite; duplicate enrollment is rejected.
+7. **Enroll:** `ViewCourse.jsx` posts to `/api/me/courses/:id`. The enrollment model links the user and course in MongoDB; a unique compound index rejects duplicate enrollment.
 8. **View courses / sign out:** `MyCourses.jsx` fetches the profile and enrollment list. Sign out removes the saved token in the browser.
 
 ## Database
 
-CourseHub uses **SQLite**, accessed through Node.js's built-in `node:sqlite` module. The database file is created at `backend/data/coursehub.sqlite` the first time the backend starts. Node.js **22.5 or newer** is required.
+CourseHub uses **MongoDB** through **Mongoose**. Set `MONGODB_URI` to a local MongoDB connection string or a MongoDB Atlas connection string. On startup, the backend connects and upserts the course catalog from `backend/data/courseCatalog.json` and `backend/data/courseDetails.json`.
 
-SQLite suits this project because the data is small and relational, the app can run without a separate database server, and the database is stored in one file. Enrollments refer to both a user and a course, so foreign keys and a combined user/course key prevent invalid or duplicate links. MongoDB would also work, but would require a separate MongoDB service or Atlas connection for this setup.
+MongoDB fits the project because course details contain nested lists (roadmaps, weekly topics, projects), and Mongoose lets the backend model those documents with schemas. Atlas also gives the Vercel-hosted API a database service that persists independently of the function runtime.
 
-Tables:
-
-| Table | Purpose | Important fields |
+| Mongoose model / MongoDB collection | Purpose | Important fields |
 | --- | --- | --- |
-| `users` | Account records | `id`, `name`, unique `email`, `password_hash`, `created_at` |
-| `courses` | Catalog and detail data | `id`, `title`, `price`, `duration`, `rating`, `details_json` |
-| `enrollments` | User-to-course relationship | `user_id`, `course_id`, `enrolled_at`; `user_id` + `course_id` form the primary key |
-
-The backend seeds course records from `data/courseCatalog.json` and `data/courseDetails.json` on startup. These JSON files are the editable source for the initial catalog; SQLite serves the app after seeding.
+| `User` / `users` | Account records | ObjectId `_id`, `name`, unique normalized `email`, `passwordHash` |
+| `Course` / `courses` | Catalog and nested course plan | string `_id` slug, `title`, `price`, `duration`, `rating`, `details` |
+| `Enrollment` / `enrollments` | User-to-course relationship | `userId` reference, `courseId` reference, `enrolledAt`; unique compound index on `userId + courseId` |
 
 ```mermaid
 erDiagram
     USERS ||--o{ ENROLLMENTS : has
     COURSES ||--o{ ENROLLMENTS : includes
     USERS {
-        int id PK
+        ObjectId id PK
         string name
         string email UK
-        string password_hash
+        string passwordHash
     }
     COURSES {
         string id PK
         string title
         string price
-        string details_json
+        object details
     }
     ENROLLMENTS {
-        int user_id PK, FK
-        string course_id PK, FK
+        ObjectId userId FK
+        string courseId FK
         datetime enrolled_at
     }
 ```
@@ -169,13 +167,13 @@ npm install
 Copy-Item .env.example .env
 ```
 
-Set `JWT_SECRET` in `backend/.env` to a long random value, then start the API:
+Set `MONGODB_URI` and `JWT_SECRET` in `backend/.env`, then start the API:
 
 ```powershell
 npm run dev
 ```
 
-The API listens at `http://localhost:4000`. `backend/data/coursehub.sqlite` is created on first start.
+The API listens at `http://localhost:4000`. The course catalog is seeded into MongoDB on first connection.
 
 **Terminal 2 — frontend:**
 
@@ -202,25 +200,27 @@ Open the local URL printed by Vite. The frontend's `/api` requests are proxied t
 
 Protected requests must include `Authorization: Bearer <token>`.
 
-## Build for production
+## Deploy to Vercel with MongoDB Atlas
 
-The Express backend can serve the frontend build from the same origin:
+The frontend and API are separate Vercel projects in this repository. The backend is an Express app exported from `backend/app.js`; Vercel can deploy Express as a Function. [Vercel Express deployment docs](https://vercel.com/docs/frameworks/backend/express)
 
-```powershell
-cd frontend
-npm run build
-cd ../backend
-npm start
-```
+1. Create a MongoDB Atlas cluster and database user. Copy its connection string for `MONGODB_URI`.
+2. In Vercel, import this repo for the backend project and set **Root Directory** to `backend`.
+3. Add backend environment variables in Vercel: `MONGODB_URI`, `JWT_SECRET`, and `CORS_ORIGIN`. Set `CORS_ORIGIN` to the exact deployed frontend origin, such as `https://coursehub-example.vercel.app`.
+4. Create/import another Vercel project from the same repo for the frontend. Set **Root Directory** to `frontend`.
+5. Add frontend environment variable `VITE_API_URL` with the backend deployment origin plus `/api`, such as `https://coursehub-api-example.vercel.app/api`.
+6. Redeploy the frontend after adding `VITE_API_URL`. Vite embeds `VITE_` variables during the build. [Vite on Vercel](https://vercel.com/docs/frameworks/frontend/vite)
 
-The backend serves `frontend/dist` when it exists, along with `/api`. The current Vercel config only handles the frontend; a separate backend host needs a production `/api` proxy or API URL configuration before deploying frontend and backend separately.
+For preview deployments, include the frontend preview origin in backend `CORS_ORIGIN`, comma-separated with any other allowed frontend origins. Backend environment variables are set in the Vercel project settings and take effect on a new deployment.
 
 ## Common updates and troubleshooting
 
-- **Add or edit a course:** update its metadata in `backend/data/courseCatalog.json` and its detail record in `backend/data/courseDetails.json`. Both records must use the same title. Restart the backend; startup seeding updates the SQLite catalog.
-- **Change the API port or database location:** set `PORT` or `DATABASE_PATH` in `backend/.env`. Keep the Vite proxy target in `frontend/vite.config.js` aligned with the backend port if you change the default port.
+- **Add or edit a course:** update its metadata in `backend/data/courseCatalog.json` and its detail record in `backend/data/courseDetails.json`. Both records must use the same title. Restart the backend; startup seeding updates MongoDB.
+- **Change the API port:** set `PORT` in `backend/.env`. Keep the Vite proxy target in `frontend/vite.config.js` aligned with the backend port if you change the default port.
 - **The frontend says it cannot reach the API:** make sure the backend is running in its own terminal at port 4000, then reload the frontend.
-- **The API reports a SQLite or Node module error:** check that Node.js is version 22.5 or newer, then run `npm install` in `backend/` again.
+- **The API reports a MongoDB connection error:** check that `MONGODB_URI` is set, the Atlas database user and password are correct, and the Atlas network access list allows the backend connection.
+- **Vercel frontend requests fail with a CORS error:** set backend `CORS_ORIGIN` to the frontend's exact origin, set frontend `VITE_API_URL` to the backend origin ending in `/api`, then redeploy both projects.
+- **Vercel deploy fails to find `package.json`:** confirm the frontend project's Root Directory is `frontend` and backend project's Root Directory is `backend`.
 - **A protected page sends you to login:** sign in again to receive a current token.
 
 ## Current scope

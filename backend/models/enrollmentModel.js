@@ -1,15 +1,27 @@
-import { db } from "../config/database.js";
+import Enrollment from "./Enrollment.js";
 
-export const findEnrollmentsByUserId = (userId) => db.prepare(`
-  SELECT c.id, c.title, c.price, c.duration, c.rating, e.enrolled_at AS enrolledAt
-  FROM enrollments e JOIN courses c ON c.id = e.course_id
-  WHERE e.user_id = ? ORDER BY e.enrolled_at DESC
-`).all(userId);
+export async function findEnrollmentsByUserId(userId) {
+  const enrollments = await Enrollment.find({ userId })
+    .sort({ enrolledAt: -1 })
+    .populate("courseId")
+    .lean();
 
-export const isEnrolled = (userId, courseId) => Boolean(db.prepare(
-  "SELECT 1 FROM enrollments WHERE user_id = ? AND course_id = ?",
-).get(userId, courseId));
+  return enrollments
+    .filter(({ courseId }) => courseId)
+    .map(({ courseId, enrolledAt }) => ({
+      id: courseId._id,
+      title: courseId.title,
+      price: courseId.price,
+      duration: courseId.duration,
+      rating: courseId.rating,
+      enrolledAt,
+    }));
+}
 
-export const createEnrollment = (userId, courseId) => db.prepare(
-  "INSERT INTO enrollments (user_id, course_id) VALUES (?, ?)",
-).run(userId, courseId);
+export async function isEnrolled(userId, courseId) {
+  return Boolean(await Enrollment.exists({ userId, courseId }));
+}
+
+export async function createEnrollment(userId, courseId) {
+  return Enrollment.create({ userId, courseId });
+}

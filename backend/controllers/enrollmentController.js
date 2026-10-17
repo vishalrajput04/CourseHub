@@ -5,16 +5,23 @@ import {
   isEnrolled,
 } from "../models/enrollmentModel.js";
 
-export function listMyCourses(req, res) {
-  return res.json({ courses: findEnrollmentsByUserId(req.user.id) });
+export async function listMyCourses(req, res) {
+  return res.json({ courses: await findEnrollmentsByUserId(req.user.id) });
 }
 
-export function enrollInCourse(req, res) {
+export async function enrollInCourse(req, res, next) {
   const { id: courseId } = req.params;
-  if (!courseExists(courseId)) return res.status(404).json({ error: "Course not found." });
-  if (isEnrolled(req.user.id, courseId)) {
+  if (!(await courseExists(courseId))) return res.status(404).json({ error: "Course not found." });
+  if (await isEnrolled(req.user.id, courseId)) {
     return res.status(409).json({ error: "You are already enrolled in this course." });
   }
-  createEnrollment(req.user.id, courseId);
-  return res.status(201).json({ message: "Enrollment successful." });
+  try {
+    await createEnrollment(req.user.id, courseId);
+    return res.status(201).json({ message: "Enrollment successful." });
+  } catch (error) {
+    if (error.code === 11000) {
+      return res.status(409).json({ error: "You are already enrolled in this course." });
+    }
+    return next(error);
+  }
 }

@@ -1,61 +1,51 @@
-import { DatabaseSync } from "node:sqlite";
-import { existsSync, mkdirSync, readFileSync } from "node:fs";
-import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import mongoose from "mongoose";
+import Course from "../models/Course.js";
+import courseCatalog from "../data/courseCatalog.json" with { type: "json" };
+import courseDetails from "../data/courseDetails.json" with { type: "json" };
 import "./env.js";
 
-const backendDir = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const dataDir = resolve(backendDir, "data");
-const databasePath = resolve(backendDir, process.env.DATABASE_PATH || "./data/coursehub.sqlite");
-
-mkdirSync(dirname(databasePath), { recursive: true });
-export const db = new DatabaseSync(databasePath);
-db.exec("PRAGMA journal_mode = WAL; PRAGMA foreign_keys = ON;");
-
-db.exec(`
-  CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    email TEXT NOT NULL UNIQUE,
-    password_hash TEXT NOT NULL,
-    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
-  );
-  CREATE TABLE IF NOT EXISTS courses (
-    id TEXT PRIMARY KEY,
-    title TEXT NOT NULL UNIQUE,
-    price TEXT NOT NULL,
-    duration TEXT NOT NULL,
-    rating TEXT NOT NULL,
-    details_json TEXT NOT NULL
-  );
-  CREATE TABLE IF NOT EXISTS enrollments (
-    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    course_id TEXT NOT NULL REFERENCES courses(id) ON DELETE CASCADE,
-    enrolled_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (user_id, course_id)
-  );
-`);
-
-const detailsByTitle = JSON.parse(readFileSync(resolve(dataDir, "courseDetails.json"), "utf8"));
-const courseCatalog = JSON.parse(readFileSync(resolve(dataDir, "courseCatalog.json"), "utf8"));
+let connectionPromise;
 
 const slugify = (title) => title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-const saveCourse = db.prepare(`
-  INSERT INTO courses (id, title, price, duration, rating, details_json)
-  VALUES (@id, @title, @price, @duration, @rating, @details_json)
-  ON CONFLICT(id) DO UPDATE SET
-    title = excluded.title,
-    price = excluded.price,
-    duration = excluded.duration,
-    rating = excluded.rating,
-    details_json = excluded.details_json
-`);
 
-for (const { title, price, duration, rating } of courseCatalog) {
-  const details = detailsByTitle[title];
-  if (!details) throw new Error(`Missing course details for ${title}`);
-  saveCourse.run({
-    id: slugify(title), title, price, duration, rating,
-    details_json: JSON.stringify(details),
+async function seedCourses() {
+  const operations = courseCatalog.map(({ title, price, duration, rating }) => {
+    const details = courseDetails[title];
+    if (!details) throw new Error(`Missing course details for ${title}`);
+    return {
+      updateOne: {
+        filter: { _id: slugify(title) },
+        update: { $set: { title, price, duration, rating, details } },
+        upsert: true,
+      },
+    };
   });
+  await Course.bulkWrite(operations);
 }
+
+export async function connectDatabase() {
+  const { MONGODB_URI } = process.env;
+  if (!MONGODB_URI) throw new Error("MONGODB_URI is required to connect to MongoDB.");
+  if (mongoose.connection.readyState === 1) return mongoose.connection;
+
+  if (!connectionPromise) {
+    connectionPromise = mongoose.connect(MONGODB_URI, {
+      serverSelectionTimeoutMS: 10000,
+      maxPoolSize: 10,
+    })
+      .then(async () => {
+        await seedCourses();
+        return mongoose.connection;
+      })
+      .catch((error) => {
+        connectionPromise = undefined;
+        throw error;
+      });
+  }
+
+  return connectionPromise;
+}
+
+mongoose.connection.on("disconnected", () => {
+  connectionPromise = undefined;
+});

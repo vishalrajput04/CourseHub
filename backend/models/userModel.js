@@ -1,14 +1,21 @@
-import { db } from "../config/database.js";
+import User from "./User.js";
 
-export const findUserByEmail = (email) =>
-  db.prepare("SELECT id, name, email, password_hash FROM users WHERE email = ?").get(email);
+const toPublicUser = (user) => ({
+  id: user._id.toString(),
+  name: user.name,
+  email: user.email,
+});
 
-export const findPublicUserById = (id) =>
-  db.prepare("SELECT id, name, email FROM users WHERE id = ?").get(id);
+export async function findUserByEmail(email) {
+  return User.findOne({ email }).select("+passwordHash");
+}
 
-export const createUser = ({ name, email, passwordHash }) => {
-  const result = db.prepare(
-    "INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)",
-  ).run(name, email, passwordHash);
-  return findPublicUserById(result.lastInsertRowid);
-};
+export async function findPublicUserById(id) {
+  const user = await User.findById(id).lean();
+  return user ? toPublicUser(user) : null;
+}
+
+export async function createUser({ name, email, passwordHash }) {
+  const user = await User.create({ name, email, passwordHash });
+  return toPublicUser(user);
+}

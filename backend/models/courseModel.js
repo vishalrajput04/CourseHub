@@ -1,19 +1,26 @@
-import { db } from "../config/database.js";
+import Course from "./Course.js";
 
-export const findAllCourses = () => db.prepare(
-  "SELECT id, title, price, duration, rating, details_json FROM courses ORDER BY rowid",
-).all().map(({ details_json, ...course }) => ({
-  ...course,
-  description: JSON.parse(details_json).description,
-}));
+const toCourseSummary = (course) => ({
+  id: course._id,
+  title: course.title,
+  price: course.price,
+  duration: course.duration,
+  rating: course.rating,
+  description: course.details?.description,
+});
 
-export const findCourseById = (id) => {
-  const course = db.prepare(
-    "SELECT id, title, price, duration, rating, details_json FROM courses WHERE id = ?",
-  ).get(id);
-  if (!course) return undefined;
-  const { details_json, ...metadata } = course;
-  return { ...metadata, ...JSON.parse(details_json) };
-};
+export async function findAllCourses() {
+  const courses = await Course.find().sort({ title: 1 }).lean();
+  return courses.map(toCourseSummary);
+}
 
-export const courseExists = (id) => Boolean(db.prepare("SELECT 1 FROM courses WHERE id = ?").get(id));
+export async function findCourseById(id) {
+  const course = await Course.findById(id).lean();
+  if (!course) return null;
+  const { _id, details, ...metadata } = course;
+  return { ...metadata, id: _id, ...details };
+}
+
+export async function courseExists(id) {
+  return Boolean(await Course.exists({ _id: id }));
+}
