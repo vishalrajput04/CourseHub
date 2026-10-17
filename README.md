@@ -167,7 +167,7 @@ npm install
 Copy-Item .env.example .env
 ```
 
-Set `MONGODB_URI` and `JWT_SECRET` in `backend/.env`, then start the API:
+Set `MONGODB_URI` to your Atlas connection string and set `JWT_SECRET` in `backend/.env`, then start the API. This local `.env` file is ignored by Git and is not pushed to GitHub.
 
 ```powershell
 npm run dev
@@ -204,7 +204,7 @@ Protected requests must include `Authorization: Bearer <token>`.
 
 The frontend and API are separate Vercel projects in this repository. The backend is an Express app exported from `backend/app.js`; Vercel can deploy Express as a Function. [Vercel Express deployment docs](https://vercel.com/docs/frameworks/backend/express)
 
-1. Create a MongoDB Atlas cluster and database user. Copy its connection string for `MONGODB_URI`.
+1. Create a MongoDB Atlas cluster and database user. Copy its connection string for `MONGODB_URI`; replace the username and password placeholders before saving it.
 2. In Vercel, import this repo for the backend project and set **Root Directory** to `backend`.
 3. Add backend environment variables in Vercel: `MONGODB_URI`, `JWT_SECRET`, and `CORS_ORIGIN`. Set `CORS_ORIGIN` to the exact deployed frontend origin, such as `https://coursehub-example.vercel.app`.
 4. Create/import another Vercel project from the same repo for the frontend. Set **Root Directory** to `frontend`.
