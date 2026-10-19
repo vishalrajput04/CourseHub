@@ -18,6 +18,7 @@ const Login = () => {
         body: JSON.stringify(data),
       });
       localStorage.setItem("coursehubToken", token);
+      console.info("CourseHub: login successful");
       navigate("/my-courses");
     } catch (error) {
       alert(error.message);

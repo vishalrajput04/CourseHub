@@ -90,7 +90,6 @@ CourseHub/
     ├── src/
     │   ├── assets/                 # images and logos
     │   ├── components/             # page and reusable UI components
-    │   ├── data/courseDetails.json # older frontend copy; API uses backend/data
     │   ├── lib/api.js              # shared API request helper
     │   ├── App.jsx                 # route-to-page mapping
     │   ├── main.jsx                # React and BrowserRouter entry point
