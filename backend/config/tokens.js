@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { jwtSecret } from "./env.js";
+import { jwtSecret } from "./settings.js";
 
 export const createAccessToken = (user) =>
   jwt.sign({ sub: String(user.id) }, jwtSecret, { expiresIn: "7d" });

@@ -1,5 +1,4 @@
-import React from "react";
-function ComponentDescription() {
+function HomePage() {
   return (
     <section className="bg-gray-300 py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -146,4 +145,4 @@ function ComponentDescription() {
     </section>
   );
 }
-export default ComponentDescription;
+export default HomePage;

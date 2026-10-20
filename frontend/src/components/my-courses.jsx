@@ -52,6 +52,7 @@ const MyCourses = () => {
           <button
             onClick={() => {
               localStorage.removeItem("coursehubToken");
+              localStorage.removeItem("coursehubUser");
               navigate("/login");
             }}
             className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
@@ -83,7 +84,7 @@ const MyCourses = () => {
                   <span className="font-bold text-green-600">{course.price}</span>
                 </div>
                 <button
-                  onClick={() => navigate(`/ViewCourse/${course.id}`)}
+                  onClick={() => navigate(`/courses/${course.id}`)}
                   className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700"
                 >
                   View Course

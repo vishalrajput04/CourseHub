@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 function CourseCard({ course }) {
   const navigate = useNavigate();
@@ -18,7 +17,7 @@ function CourseCard({ course }) {
           <span className="text-xl font-bold">{course.price}</span>
 
           <button
-            onClick={() => navigate(`/ViewCourse/${course.id}`)}
+            onClick={() => navigate(`/courses/${course.id}`)}
             className="bg-blue-600 cursor-pointer text-white px-4 py-2 rounded-lg hover:bg-blue-700"
           >
             View Course

@@ -1,5 +1,7 @@
 # CourseHub frontend
 
-The frontend is part of the CourseHub full-stack project. See the [project README](../README.md) for the architecture, backend and MongoDB details, setup steps, Vercel deployment, and API guide.
+`src/app.jsx` connects URLs to page components. `src/lib/api.js` sends requests to the backend and attaches the login token. Page components are in `src/components/`.
 
-For local frontend development, run `npm install` and `npm run dev` from this directory. The Vite development server forwards `/api` requests to the backend at `http://localhost:4000`.
+For frontend development, run `npm install` and `npm run dev` from this directory. API requests use the Render URL in `.env.example`. To use a local backend, create `.env` with `VITE_API_URL=http://localhost:4000`.
+
+See the [project guide](../README.md) for the Vercel setup and API route list.

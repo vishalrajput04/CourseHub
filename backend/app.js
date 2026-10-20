@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
-import authRoutes from "./routes/authRoutes.js";
-import courseRoutes from "./routes/courseRoutes.js";
-import enrollmentRoutes from "./routes/enrollmentRoutes.js";
+import authRoutes from "./routes/auth.js";
+import courseRoutes from "./routes/courses.js";
+import enrollmentRoutes from "./routes/enrollments.js";
 import { connectDatabase } from "./config/database.js";
 
 const app = express();
@@ -15,7 +15,8 @@ app.disable("x-powered-by");
 app.use(
   cors({
     origin(origin, callback) {
-      callback(null, !origin || allowedOrigins.includes(origin));
+      const isVercelPreview = origin?.startsWith("https://") && origin.endsWith(".vercel.app");
+      callback(null, !origin || allowedOrigins.includes(origin) || isVercelPreview);
     },
   }),
 );

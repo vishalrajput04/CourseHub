@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
-import { createAccessToken } from "../config/auth.js";
-import { createUser, findUserByEmail } from "../models/userModel.js";
+import { createAccessToken } from "../config/tokens.js";
+import { createUser, findUserByEmail } from "../models/users.js";
 
 export async function signup(req, res, next) {
   const name = typeof req.body?.name === "string" ? req.body.name.trim() : "";

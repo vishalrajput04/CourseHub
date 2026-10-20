@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { enrollInCourse, listMyCourses } from "../controllers/enrollmentController.js";
-import { requireAuth } from "../middleware/requireAuth.js";
+import { enrollInCourse, listMyCourses } from "../controllers/enrollments.js";
+import { requireAuth } from "../middleware/auth.js";
 
 const router = Router();
 router.use(requireAuth);

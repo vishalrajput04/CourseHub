@@ -1,162 +1,124 @@
 # CourseHub
 
-CourseHub is a course catalog and enrollment app. Visitors can browse free and paid courses, inspect course plans, create an account, sign in, enroll, and see their enrolled courses. The frontend is a React single page app; the backend is an Express JSON API using MongoDB through Mongoose.
+CourseHub is a small online learning platform project. A visitor can browse courses, create an account, log in, enroll in a course, and see enrolled courses. The frontend is a React app hosted on Vercel. The backend is an Express API hosted on Render, and MongoDB stores user accounts and enrollments.
 
-## Contents
+This is a learning and portfolio project. Course enrollment is recorded without taking payment. A payment gateway can be added later.
 
-- [Features](#features)
-- [Technology and concepts](#technology-and-concepts)
-- [Architecture](#architecture)
-- [Folder structure](#folder-structure)
-- [How the app works](#how-the-app-works)
-- [Database](#database)
-- [Run locally](#run-locally)
-- [API routes](#api-routes)
-- [Deploy to Vercel](#deploy-to-vercel-with-mongodb-atlas)
-- [Current scope](#current-scope)
-
-## Features
-
-- Browse 24 courses, grouped into free and paid sections.
-- Open a course by its URL and read its description, roadmap, weekly topics, prerequisites, projects, and career scope.
-- Sign up and sign in.
-- Enroll in a course while signed in.
-- View enrolled courses and sign out.
-- Keep account and enrollment records between server restarts.
-
-## Technology and concepts
-
-| Area | Technology or concept | What it does here |
-| --- | --- | --- |
-| Frontend | React 19 | Builds the page from reusable components. |
-| Frontend | React Router | Handles page URLs without full page reloads. |
-| Frontend | React state and effects | Loads API data and updates the page after requests. |
-| Frontend | React Hook Form | Reads and validates signup and login forms. |
-| Frontend | Tailwind CSS | Styles the existing responsive UI using utility classes. |
-| Frontend tooling | Vite | Runs the frontend development server and creates production assets. |
-| API | Express 5 | Defines the HTTP API and is deployed as a Vercel Function. |
-| Backend architecture | MVC | Models handle data, controllers handle requests, and React is the View. Routes connect URLs to controllers. |
-| Database | MongoDB Atlas or local MongoDB, through Mongoose | Stores users, courses, and enrollments as MongoDB documents. |
-| Authentication | bcryptjs and JWT | Hashes account passwords and issues signed bearer tokens after login. |
-| Configuration | dotenv and CORS | Loads backend settings and allows the deployed frontend origin to call the API. |
-
-## Architecture
-
-The backend follows MVC with routes and middleware around it:
-
-1. A **Route** matches an HTTP method and URL, such as `POST /api/auth/login`.
-2. A **Controller** validates the request, calls the required model, and creates the JSON response.
-3. A **Model** validates and reads or writes MongoDB documents through Mongoose.
-4. The **View** is the React frontend. It calls the API and renders the response.
-
-Authentication middleware checks bearer tokens before protected enrollment routes. The frontend and API exchange JSON. During development, Vite forwards `/api` requests to the backend.
-
-## Folder structure
+## Folder map
 
 ```text
 CourseHub/
-├── README.md
-├── backend/
-│   ├── config/
-│   │   ├── auth.js                 # create and verify JWTs
-│   │   ├── database.js             # Mongoose connection and catalog seeding
-│   │   └── env.js                  # environment settings and port
-│   ├── controllers/
-│   │   ├── authController.js       # signup, login, current user
-│   │   ├── courseController.js     # list and get course details
-│   │   └── enrollmentController.js # list and create enrollments
-│   ├── data/
-│   │   ├── courseCatalog.json      # course title, price, duration, rating
-│   │   ├── courseDetails.json      # course descriptions and learning plans
-│   ├── middleware/
-│   │   └── requireAuth.js          # verifies the bearer token
-│   ├── models/
-│   │   ├── Course.js               # Mongoose course schema
-│   │   ├── Enrollment.js           # Mongoose enrollment schema and index
-│   │   ├── User.js                 # Mongoose user schema
-│   │   ├── courseModel.js          # course queries and response mapping
-│   │   ├── enrollmentModel.js      # enrollment queries
-│   │   └── userModel.js            # account queries and public mapping
-│   ├── routes/
-│   │   ├── authRoutes.js           # /api/auth/*
-│   │   ├── courseRoutes.js         # /api/courses/*
-│   │   └── enrollmentRoutes.js     # /api/me/courses/*
-│   ├── .env.example
-│   ├── app.js                      # Express middleware and route setup
-│   ├── package.json
-│   └── server.js                   # starts the HTTP server
-└── frontend/
-    ├── public/                     # static icons and favicon
-    ├── src/
-    │   ├── assets/                 # images and logos
-    │   ├── components/             # page and reusable UI components
-    │   ├── lib/api.js              # shared API request helper
-    │   ├── App.jsx                 # route-to-page mapping
-    │   ├── main.jsx                # React and BrowserRouter entry point
-    │   └── index.css               # global styles and page transition
-    ├── package.json
-    └── vite.config.js              # dev server and /api proxy
+├── README.md                   Project setup and explanation
+├── frontend/                   Website shown to learners
+│   └── src/
+│       ├── main.jsx             Starts React and page routing
+│       ├── app.jsx              Connects URL paths to page components
+│       ├── index.css            Global styles
+│       ├── lib/
+│       │   └── api.js           Sends requests to the backend and adds the login token
+│       └── components/          Website pages and shared parts
+│           ├── home-page.jsx        Home page
+│           ├── courses.jsx          Course list page
+│           ├── course-card.jsx      One course in the list
+│           ├── course-details.jsx   Details and enroll button
+│           ├── signup.jsx           Create account form
+│           ├── login.jsx            Login form
+│           ├── my-courses.jsx       Signed-in learner's courses and logout
+│           ├── navbar.jsx           Top navigation
+│           ├── footer.jsx           Bottom links and contact details
+│           └── page-transition.jsx  Small transition when changing pages
+└── backend/                    API and database code
+    ├── server.js               Starts the API server
+    ├── app.js                  Sets up CORS, JSON, database connection, and routes
+    ├── config/
+    │   ├── settings.js          Reads environment settings like PORT and JWT_SECRET
+    │   ├── database.js          Connects to MongoDB and loads the course data
+    │   └── tokens.js            Creates and checks login tokens
+    ├── routes/                 Connects API URLs to request handlers
+    │   ├── auth.js              Signup, login, and current-account URLs
+    │   ├── courses.js           Course list and course detail URLs
+    │   └── enrollments.js       Learner enrollment URLs
+    ├── controllers/            Checks requests and decides what response to send
+    │   ├── auth.js              Signup and login steps
+    │   ├── courses.js           Course request steps
+    │   └── enrollments.js       Enrollment request steps
+    ├── middleware/
+    │   └── auth.js              Checks the login token for private URLs
+    ├── models/                 MongoDB shapes and database queries
+    │   ├── user.js              Account fields
+    │   ├── users.js             Account database queries
+    │   ├── course.js            Course fields
+    │   ├── courses.js           Course database queries
+    │   ├── enrollment.js        Enrollment fields
+    │   └── enrollments.js       Enrollment database queries
+    └── data/
+        ├── courses.json         Course title, price, duration, and rating
+        └── course-details.json  Course descriptions and learning plans
 ```
 
-### Main frontend components
-
-- `Navbar.jsx`, `Footer.jsx`: shared page layout.
-- `ComponentDescription.jsx`: home page content.
-- `Courses.jsx`, `CourseCard.jsx`: fetch and display the catalog.
-- `ViewCourse.jsx`: fetch and display one course; handles enrollment.
-- `Signup.jsx`, `Login.jsx`: account forms that call the auth API.
-- `MyCourses.jsx`: fetches the signed-in user's enrollments.
-- `PageTransition.jsx`: applies the page transition when the route changes.
-
-## How the app works
-
-1. **Start:** `main.jsx` mounts React inside `BrowserRouter`; `App.jsx` maps URLs to page components.
-2. **Load courses:** `Courses.jsx` calls `apiRequest('/courses')`. Locally, Vite proxies it to `GET /api/courses`; the controller gets records through `courseModel`.
-3. **Open details:** each course has a slug ID, for example `/ViewCourse/react-js`. `ViewCourse.jsx` asks `GET /api/courses/react-js`, so refreshing the page still loads that course.
-4. **Sign up:** `Signup.jsx` posts name, email, and password. The controller hashes the password with bcryptjs and the model saves the user.
-5. **Sign in:** `Login.jsx` posts email and password. If they match, the API returns a JWT. The frontend keeps the token and sends it as `Authorization: Bearer <token>` on later requests.
-6. **Protect account actions:** `requireAuth.js` verifies that token and attaches the matching user to the request.
-7. **Enroll:** `ViewCourse.jsx` posts to `/api/me/courses/:id`. The enrollment model links the user and course in MongoDB; a unique compound index rejects duplicate enrollment.
-8. **View courses / sign out:** `MyCourses.jsx` fetches the profile and enrollment list. Sign out removes the saved token in the browser.
-
-## Database
-
-CourseHub uses **MongoDB** through **Mongoose**. Set `MONGODB_URI` to a local MongoDB connection string or a MongoDB Atlas connection string. On startup, the backend connects and upserts the course catalog from `backend/data/courseCatalog.json` and `backend/data/courseDetails.json`.
-
-MongoDB fits the project because course details contain nested lists (roadmaps, weekly topics, projects), and Mongoose lets the backend model those documents with schemas. Atlas also gives the Vercel-hosted API a database service that persists independently of the function runtime.
-
-| Mongoose model / MongoDB collection | Purpose | Important fields |
-| --- | --- | --- |
-| `User` / `users` | Account records | ObjectId `_id`, `name`, unique normalized `email`, `passwordHash` |
-| `Course` / `courses` | Catalog and nested course plan | string `_id` slug, `title`, `price`, `duration`, `rating`, `details` |
-| `Enrollment` / `enrollments` | User-to-course relationship | `userId` reference, `courseId` reference, `enrolledAt`; unique compound index on `userId + courseId` |
+### How a website request reaches the database
 
 ```mermaid
-erDiagram
-    USERS ||--o{ ENROLLMENTS : has
-    COURSES ||--o{ ENROLLMENTS : includes
-    USERS {
-        ObjectId id PK
-        string name
-        string email UK
-        string passwordHash
-    }
-    COURSES {
-        string id PK
-        string title
-        string price
-        object details
-    }
-    ENROLLMENTS {
-        ObjectId userId FK
-        string courseId FK
-        datetime enrolled_at
-    }
+flowchart LR
+    Learner --> Page[Frontend page]
+    Page --> API[frontend/src/lib/api.js]
+    API -->|HTTP request| Route[backend/routes]
+    Route --> Handler[backend/controllers]
+    Handler --> Model[backend/models]
+    Model --> Database[(MongoDB)]
+    Database --> Model
+    Model --> Handler
+    Handler -->|JSON response| API
+    API --> Page
 ```
 
-## Run locally
+Think of the backend folders this way: a **route** picks the request, a **controller** handles the steps, and a **model** reads or writes the database.
 
-Use Node.js 22.5 or newer. Open two terminals from the project root.
+## Main app flows
+
+### Browse a course
+
+1. `app.jsx` shows `courses.jsx` for `/courses`.
+2. `courses.jsx` asks `api.js` for `GET /api/courses`.
+3. The backend route calls the courses controller, which asks the course model for the list.
+4. The backend sends JSON back. React displays a `course-card.jsx` for each course.
+5. Selecting a card opens `course-details.jsx`, which requests `GET /api/courses/:id`.
+
+Course information starts in the two JSON files in `backend/data/`. The backend loads or updates these records in MongoDB when it connects. When adding a course, keep its title the same in both files.
+
+### Sign up and log in
+
+1. `signup.jsx` sends the name, email, and password to `POST /api/auth/signup`.
+2. The auth controller checks the input and saves a hashed password through the user model. The original password is not stored.
+3. `login.jsx` sends the email and password to `POST /api/auth/login`.
+4. The backend checks the password and returns a signed login token.
+5. The frontend stores the token in browser storage. `api.js` sends it with requests that require login.
+
+### Enroll and view enrolled courses
+
+1. The Enroll button sends `POST /api/me/courses/:id`.
+2. The auth middleware checks the token before the enrollment controller runs.
+3. The controller checks that the course exists and that the learner has not already enrolled, then saves the enrollment.
+4. `my-courses.jsx` requests the learner account and enrollment list and displays them. Logout removes the saved login information.
+
+At the moment, enrollment does not charge money. Paid course labels are for the demo catalog only.
+
+## API routes
+
+| Method | URL | What it does | Login needed? |
+| --- | --- | --- | --- |
+| `GET` | `/api/health` | Checks the API and database connection | No |
+| `POST` | `/api/auth/signup` | Creates an account | No |
+| `POST` | `/api/auth/login` | Checks credentials and returns a token | No |
+| `GET` | `/api/auth/me` | Returns the signed-in account | Yes |
+| `GET` | `/api/courses` | Returns the course list | No |
+| `GET` | `/api/courses/:id` | Returns one course | No |
+| `GET` | `/api/me/courses` | Returns the learner's enrolled courses | Yes |
+| `POST` | `/api/me/courses/:id` | Enrolls the learner in a course | Yes |
+
+## Run the project locally
+
+You need Node.js and a MongoDB connection string. Open two terminals in the project folder.
 
 **Terminal 1 — backend:**
 
@@ -164,15 +126,10 @@ Use Node.js 22.5 or newer. Open two terminals from the project root.
 cd backend
 npm install
 Copy-Item .env.example .env
-```
-
-Set `MONGODB_URI` to your Atlas connection string and set `JWT_SECRET` in `backend/.env`, then start the API. This local `.env` file is ignored by Git and is not pushed to GitHub.
-
-```powershell
 npm run dev
 ```
 
-The API listens at `http://localhost:4000`. The course catalog is seeded into MongoDB on first connection.
+Put your MongoDB connection string in `backend/.env` as `MONGODB_URI`. Set a private value for `JWT_SECRET`. The API uses port 4000 by default.
 
 **Terminal 2 — frontend:**
 
@@ -182,46 +139,24 @@ npm install
 npm run dev
 ```
 
-Open the local URL printed by Vite. The frontend's `/api` requests are proxied to port 4000. Keep both terminals running while using the app.
+Open the local URL printed by Vite. The frontend example environment uses the deployed Render API. To use the local backend, create `frontend/.env` with:
 
-## API routes
+```text
+VITE_API_URL=http://localhost:4000
+```
 
-| Method | Route | Requires login | Purpose |
-| --- | --- | --- | --- |
-| `GET` | `/api/health` | No | Check that the API is running. |
-| `POST` | `/api/auth/signup` | No | Create an account. |
-| `POST` | `/api/auth/login` | No | Sign in and receive a JWT. |
-| `GET` | `/api/auth/me` | Yes | Get the signed-in user's profile. |
-| `GET` | `/api/courses` | No | List all courses. |
-| `GET` | `/api/courses/:id` | No | Get a course and its details by slug ID. |
-| `GET` | `/api/me/courses` | Yes | List the signed-in user's courses. |
-| `POST` | `/api/me/courses/:id` | Yes | Enroll in a course. |
+## Deployment
 
-Protected requests must include `Authorization: Bearer <token>`.
+**Render:** use `backend` as the service root directory, `npm install` as the build command, and `npm start` as the start command. Add `MONGODB_URI`, `JWT_SECRET`, and `CORS_ORIGIN` in the Render environment settings. `CORS_ORIGIN` should be your Vercel website address.
 
-## Deploy to Vercel with MongoDB Atlas
+**Vercel:** use `frontend` as the project root directory and set `VITE_API_URL=https://coursehub-c006.onrender.com`. Redeploy after changing this value.
 
-The frontend and API are separate Vercel projects in this repository. The backend is an Express app exported from `backend/app.js`; Vercel can deploy Express as a Function. [Vercel Express deployment docs](https://vercel.com/docs/frameworks/backend/express)
+## Possible future feature: payments
 
-1. Create a MongoDB Atlas cluster and database user. Copy its connection string for `MONGODB_URI`; replace the username and password placeholders before saving it.
-2. In Vercel, import this repo for the backend project and set **Root Directory** to `backend`.
-3. Add backend environment variables in Vercel: `MONGODB_URI`, `JWT_SECRET`, and `CORS_ORIGIN`. Set `CORS_ORIGIN` to the exact deployed frontend origin, such as `https://coursehub-example.vercel.app`.
-4. Create/import another Vercel project from the same repo for the frontend. Set **Root Directory** to `frontend`.
-5. Add frontend environment variable `VITE_API_URL` with the backend deployment origin plus `/api`, such as `https://coursehub-api-example.vercel.app/api`.
-6. Redeploy the frontend after adding `VITE_API_URL`. Vite embeds `VITE_` variables during the build. [Vite on Vercel](https://vercel.com/docs/frameworks/frontend/vite)
+A payment gateway is not connected yet. When adding one, the payment should be confirmed by the backend before creating an enrollment. A simple place to grow the project would be:
 
-For preview deployments, include the frontend preview origin in backend `CORS_ORIGIN`, comma-separated with any other allowed frontend origins. Backend environment variables are set in the Vercel project settings and take effect on a new deployment.
+- Frontend: add a checkout page/component under `frontend/src/components/`.
+- Backend: add a payment route and controller under `backend/routes/` and `backend/controllers/`.
+- Database: add a payment model under `backend/models/` to save the course, learner, amount, and payment status.
 
-## Common updates and troubleshooting
-
-- **Add or edit a course:** update its metadata in `backend/data/courseCatalog.json` and its detail record in `backend/data/courseDetails.json`. Both records must use the same title. Restart the backend; startup seeding updates MongoDB.
-- **Change the API port:** set `PORT` in `backend/.env`. Keep the Vite proxy target in `frontend/vite.config.js` aligned with the backend port if you change the default port.
-- **The frontend says it cannot reach the API:** make sure the backend is running in its own terminal at port 4000, then reload the frontend.
-- **The API reports a MongoDB connection error:** check that `MONGODB_URI` is set, the Atlas database user and password are correct, and the Atlas network access list allows the backend connection.
-- **Vercel frontend requests fail with a CORS error:** set backend `CORS_ORIGIN` to the frontend's exact origin, set frontend `VITE_API_URL` to the backend origin ending in `/api`, then redeploy both projects.
-- **Vercel deploy fails to find `package.json`:** confirm the frontend project's Root Directory is `frontend` and backend project's Root Directory is `backend`.
-- **A protected page sends you to login:** sign in again to receive a current token.
-
-## Current scope
-
-The app includes course catalog and enrollment flows. Enrolling in a paid course currently records the enrollment directly; there is no payment gateway. Courses show descriptions and study plans, but the app does not include lesson videos or a course player. There is no admin dashboard for editing courses.
+The exact payment steps depend on the gateway chosen later. Do not mark a paid course as enrolled just because the learner clicked the payment button; first verify the successful payment on the backend.

@@ -1,4 +1,4 @@
-import User from "./User.js";
+import User from "./user.js";
 
 const toPublicUser = (user) => ({
   id: user._id.toString(),

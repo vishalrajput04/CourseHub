@@ -1,4 +1,4 @@
-import { findAllCourses, findCourseById } from "../models/courseModel.js";
+import { findAllCourses, findCourseById } from "../models/courses.js";
 
 export async function listCourses(_req, res) {
   return res.json({ courses: await findAllCourses() });

@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { apiRequest } from "../lib/api.js";
 
-const Login = () => {
+const Signup = () => {
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const {
     register,
@@ -13,15 +15,13 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
-      const { token } = await apiRequest("/auth/login", {
+      await apiRequest("/auth/signup", {
         method: "POST",
         body: JSON.stringify(data),
       });
-      localStorage.setItem("coursehubToken", token);
-      console.info("CourseHub: login successful");
-      navigate("/my-courses");
+      navigate("/login");
     } catch (error) {
-      alert(error.message);
+      setError(error.message);
     }
   };
 
@@ -29,14 +29,31 @@ const Login = () => {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
       <div className="bg-white w-full max-w-md p-8 rounded-2xl shadow-lg">
         <h1 className="text-3xl font-bold text-center text-blue-600 mb-2">
-          Login
+          Create Account
         </h1>
 
         <p className="text-center text-gray-500 mb-6">
-          Login to access your courses
+          Signup to start learning
         </p>
 
         <form onSubmit={handleSubmit(onSubmit)}>
+          {error && <p role="alert" className="mb-4 text-red-600">{error}</p>}
+          {/* Name */}
+          <label className="block font-medium mb-2">Name</label>
+
+          <input
+            type="text"
+            placeholder="Enter your name"
+            className="w-full border rounded-lg px-4 py-3 mb-1 outline-none focus:ring-2 focus:ring-blue-500"
+            {...register("name", {
+              required: "Name is required",
+            })}
+          />
+
+          {errors.name && (
+            <p className="text-red-500 text-sm mb-4">{errors.name.message}</p>
+          )}
+
           {/* Email */}
           <label className="block font-medium mb-2">Email</label>
 
@@ -58,10 +75,14 @@ const Login = () => {
 
           <input
             type="password"
-            placeholder="Enter your password"
+            placeholder="Create password"
             className="w-full border rounded-lg px-4 py-3 mb-1 outline-none focus:ring-2 focus:ring-blue-500"
             {...register("password", {
               required: "Password is required",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters",
+              },
             })}
           />
 
@@ -75,17 +96,17 @@ const Login = () => {
             type="submit"
             className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
           >
-            Login
+            Signup
           </button>
         </form>
 
         <p className="text-center mt-5 text-gray-600">
-          Don't have an account?{" "}
+          Already have an account?{" "}
           <Link
-            to="/signup"
+            to="/login"
             className="text-blue-600 font-semibold hover:underline"
           >
-            Signup
+            Login
           </Link>
         </p>
       </div>
@@ -93,4 +114,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

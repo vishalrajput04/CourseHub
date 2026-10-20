@@ -1,9 +1,9 @@
-import { courseExists } from "../models/courseModel.js";
+import { courseExists } from "../models/courses.js";
 import {
   createEnrollment,
   findEnrollmentsByUserId,
   isEnrolled,
-} from "../models/enrollmentModel.js";
+} from "../models/enrollments.js";
 
 export async function listMyCourses(req, res) {
   return res.json({ courses: await findEnrollmentsByUserId(req.user.id) });

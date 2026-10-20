@@ -1,4 +1,4 @@
-import Enrollment from "./Enrollment.js";
+import Enrollment from "./enrollment.js";
 
 export async function findEnrollmentsByUserId(userId) {
   const enrollments = await Enrollment.find({ userId })

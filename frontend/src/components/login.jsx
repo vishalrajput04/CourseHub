@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { apiRequest } from "../lib/api.js";
 
-const Signup = () => {
+const Login = () => {
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const {
     register,
@@ -13,14 +15,15 @@ const Signup = () => {
 
   const onSubmit = async (data) => {
     try {
-      await apiRequest("/auth/signup", {
+      const { token, user } = await apiRequest("/auth/login", {
         method: "POST",
         body: JSON.stringify(data),
       });
-      alert("Signup successful! Please login.");
-      navigate("/login");
+      localStorage.setItem("coursehubToken", token);
+      localStorage.setItem("coursehubUser", JSON.stringify(user));
+      navigate("/my-courses");
     } catch (error) {
-      alert(error.message);
+      setError(error.message);
     }
   };
 
@@ -28,30 +31,15 @@ const Signup = () => {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
       <div className="bg-white w-full max-w-md p-8 rounded-2xl shadow-lg">
         <h1 className="text-3xl font-bold text-center text-blue-600 mb-2">
-          Create Account
+          Login
         </h1>
 
         <p className="text-center text-gray-500 mb-6">
-          Signup to start learning
+          Login to access your courses
         </p>
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          {/* Name */}
-          <label className="block font-medium mb-2">Name</label>
-
-          <input
-            type="text"
-            placeholder="Enter your name"
-            className="w-full border rounded-lg px-4 py-3 mb-1 outline-none focus:ring-2 focus:ring-blue-500"
-            {...register("name", {
-              required: "Name is required",
-            })}
-          />
-
-          {errors.name && (
-            <p className="text-red-500 text-sm mb-4">{errors.name.message}</p>
-          )}
-
+          {error && <p role="alert" className="mb-4 text-red-600">{error}</p>}
           {/* Email */}
           <label className="block font-medium mb-2">Email</label>
 
@@ -73,14 +61,10 @@ const Signup = () => {
 
           <input
             type="password"
-            placeholder="Create password"
+            placeholder="Enter your password"
             className="w-full border rounded-lg px-4 py-3 mb-1 outline-none focus:ring-2 focus:ring-blue-500"
             {...register("password", {
               required: "Password is required",
-              minLength: {
-                value: 6,
-                message: "Password must be at least 6 characters",
-              },
             })}
           />
 
@@ -94,17 +78,17 @@ const Signup = () => {
             type="submit"
             className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
           >
-            Signup
+            Login
           </button>
         </form>
 
         <p className="text-center mt-5 text-gray-600">
-          Already have an account?{" "}
+          Don't have an account?{" "}
           <Link
-            to="/login"
+            to="/signup"
             className="text-blue-600 font-semibold hover:underline"
           >
-            Login
+            Signup
           </Link>
         </p>
       </div>
@@ -112,4 +96,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;

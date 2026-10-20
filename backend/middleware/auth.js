@@ -1,5 +1,5 @@
-import { verifyAccessToken } from "../config/auth.js";
-import { findPublicUserById } from "../models/userModel.js";
+import { verifyAccessToken } from "../config/tokens.js";
+import { findPublicUserById } from "../models/users.js";
 
 export async function requireAuth(req, res, next) {
   const token = req.get("authorization")?.match(/^Bearer\s+(.+)$/i)?.[1];

@@ -1,39 +1,34 @@
-import React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { apiRequest } from "../lib/api.js";
 
-const ViewCourse = () => {
+const CourseDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [course, setCourse] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [loadError, setLoadError] = useState("");
+  const [result, setResult] = useState(null);
 
   useEffect(() => {
     let active = true;
-    setLoading(true);
     apiRequest(`/courses/${encodeURIComponent(id)}`)
-      .then(({ course: courseDetails }) => {
-        if (active) setCourse(courseDetails);
+      .then(({ course }) => {
+        if (active) setResult({ id, course, error: "" });
       })
       .catch((error) => {
-        if (active) setLoadError(error.message);
-      })
-      .finally(() => {
-        if (active) setLoading(false);
+        if (active) setResult({ id, course: null, error: error.message });
       });
     return () => { active = false; };
   }, [id]);
 
-  const details = course;
+  const currentResult = result?.id === id ? result : null;
+  const course = currentResult?.course;
+  const loadError = currentResult?.error;
 
-  if (loading) {
+  if (!currentResult) {
     return <div className="min-h-screen flex items-center justify-center bg-gray-100">Loading course...</div>;
   }
 
   // Agar course nahi mila
-  if (!course || !details) {
+  if (!course) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
         <div className="text-center">
@@ -69,7 +64,7 @@ const ViewCourse = () => {
             {course.title}
           </h1>
 
-          <p className="text-blue-100 text-lg">{details.description}</p>
+          <p className="text-blue-100 text-lg">{course.description}</p>
         </div>
 
         {/* Main Content */}
@@ -102,7 +97,7 @@ const ViewCourse = () => {
               {/* Level */}
               <div className="bg-gray-100 p-4 rounded-lg">
                 <p className="text-gray-500 text-sm">Level</p>
-                <p className="font-bold text-lg">{details.level}</p>
+                <p className="font-bold text-lg">{course.level}</p>
               </div>
             </div>
           </section>
@@ -111,7 +106,7 @@ const ViewCourse = () => {
           <section className="mb-10">
             <h2 className="text-2xl font-bold mb-3">Course Overview</h2>
 
-            <p className="text-gray-600 leading-7">{details.overview}</p>
+            <p className="text-gray-600 leading-7">{course.overview}</p>
           </section>
 
           {/* Course Roadmap */}
@@ -119,7 +114,7 @@ const ViewCourse = () => {
             <h2 className="text-2xl font-bold mb-5">🗺️ Course Roadmap</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {details.roadmap.map((item, index) => (
+              {course.roadmap.map((item, index) => (
                 <div
                   key={index}
                   className="bg-gray-100 p-4 rounded-lg flex items-center gap-3"
@@ -139,7 +134,7 @@ const ViewCourse = () => {
             <h2 className="text-2xl font-bold mb-5">What You'll Learn</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {details.whatYouWillLearn.map((item, index) => (
+              {course.whatYouWillLearn.map((item, index) => (
                 <div
                   key={index}
                   className="flex items-start gap-2 text-gray-700"
@@ -157,7 +152,7 @@ const ViewCourse = () => {
             <h2 className="text-2xl font-bold mb-5">📚 Week-wise Topics</h2>
 
             <div className="space-y-4">
-              {details.weekWiseTopics.map((week) => (
+              {course.weekWiseTopics.map((week) => (
                 <div
                   key={week.week}
                   className="border rounded-xl p-5 hover:shadow-md transition"
@@ -186,7 +181,7 @@ const ViewCourse = () => {
             <h2 className="text-2xl font-bold mb-4">Prerequisites</h2>
 
             <ul className="list-disc pl-6 space-y-2 text-gray-700">
-              {details.prerequisites.map((item, index) => (
+              {course.prerequisites.map((item, index) => (
                 <li key={index}>{item}</li>
               ))}
             </ul>
@@ -197,7 +192,7 @@ const ViewCourse = () => {
             <h2 className="text-2xl font-bold mb-4">💻 Projects</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {details.projects.map((project, index) => (
+              {course.projects.map((project, index) => (
                 <div
                   key={index}
                   className="bg-gray-100 p-4 rounded-lg font-medium"
@@ -212,7 +207,7 @@ const ViewCourse = () => {
           <section className="mb-10">
             <h2 className="text-2xl font-bold mb-3">Career Scope</h2>
 
-            <p className="text-gray-600 leading-7">{details.careerScope}</p>
+            <p className="text-gray-600 leading-7">{course.careerScope}</p>
           </section>
 
           {/* Enroll Button */}
@@ -241,4 +236,4 @@ const ViewCourse = () => {
     </div>
   );
 };
-export default ViewCourse;
+export default CourseDetails;

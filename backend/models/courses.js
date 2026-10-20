@@ -1,4 +1,4 @@
-import Course from "./Course.js";
+import Course from "./course.js";
 
 const toCourseSummary = (course) => ({
   id: course._id,

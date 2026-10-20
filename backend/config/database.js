@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
-import Course from "../models/Course.js";
-import courseCatalog from "../data/courseCatalog.json" with { type: "json" };
-import courseDetails from "../data/courseDetails.json" with { type: "json" };
-import "./env.js";
+import Course from "../models/course.js";
+import courses from "../data/courses.json" with { type: "json" };
+import courseDetails from "../data/course-details.json" with { type: "json" };
+import "./settings.js";
 
 let connectionPromise;
 
 const slugify = (title) => title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 
 async function seedCourses() {
-  const operations = courseCatalog.map(({ title, price, duration, rating }) => {
+  const operations = courses.map(({ title, price, duration, rating }) => {
     const details = courseDetails[title];
     if (!details) throw new Error(`Missing course details for ${title}`);
     return {

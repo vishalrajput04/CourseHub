@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import CourseCard from "./CourseCard.jsx";
+import CourseCard from "./course-card.jsx";
 import { apiRequest } from "../lib/api.js";
 
 function Courses() {
